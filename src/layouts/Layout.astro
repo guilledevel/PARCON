@@ -1,26 +1,35 @@
----                             
-  import './src/styles/global.css'  
+---
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+import '../styles/global.css';
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Parcon - Publicidad Digital e Impresión</title>
+  </head>
+
+  <body class="bg-blue-500 text-white min-h-screen flex flex-col">
+    <Navbar />
+
+    <main class="flex-grow   ">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
 </style>

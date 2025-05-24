@@ -1,0 +1,28 @@
+{
+  "bastidor": {
+    "una_cara": 180,
+    "dos_caras": 290,
+    "patas": 120,
+    "cambio_lona": 150
+  },
+  "banner": {
+    "m2_sin_barilla": 120,
+    "m2_con_barilla": 130
+  },
+  "adhesivo": {
+    "impreso": 140,
+    "plastificado": 210,
+    "plastificado_colocado": 250,
+    "con_foam": 500,
+    "con_foam_plastificado": 580
+  },
+  "luminoso": {
+    "una_cara": 530,
+    "dos_caras": 900,
+    "cambio_lona": 190
+  },
+  "basico": {
+    "menos_30cm": 45,
+    "con_colocado": 60
+  }
+}
