@@ -1,7 +1,9 @@
 export default function Footer() {
   return (
-    <footer className="text-center p-4 bg-black text-white">
-      © {new Date().getFullYear()} Farcon Publicidad Digital
+    <div className="w-screen bg-black flex justify-center items-center">
+      <footer className="text-center p-4 text-white">
+      Todos los derechos reservados © {new Date().getFullYear()} Parcon Publicidad Digital
     </footer>
+    </div>
   );
 }

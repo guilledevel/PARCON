@@ -11,13 +11,16 @@ export default function Navbar() {
     path === href ? 'text-cyan-400 font-bold' : 'text-white hover:text-cyan-300';
 
   return (
-    <nav className="bg-black p-4 flex justify-between items-center">
+    <div className="w-screen  bg-black flex justify-center items-center">
+      <nav className="w-[90%] p-4 flex justify-between items-center">
       <div className="text-2xl font-bold text-white">Parcon</div>
       <ul className="flex gap-6">
+
         <li><a href="/" className={linkClass('/')}>Inicio</a></li>
-        <li><a href="/cotizar" className={linkClass('/cotizar')}>Cotizar</a></li>
         <li><a href="/contacto" className={linkClass('/contacto')}>Contacto</a></li>
+        <li><a href="/cotizar" className={linkClass('/cotizar')}>Cotizar</a></li>
       </ul>
     </nav>
+    </div>
   );
 }
