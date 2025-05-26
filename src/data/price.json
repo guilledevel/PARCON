@@ -37,13 +37,50 @@
     "precios": {
       "una_cara": 180,
       "dos_caras": 290,
-      "letrero_parado": 120,
-      "cambio_lona": 150
+      "plastificado": 70,
+      "patas": 120
     },
     "opciones_ui": [
       { "campo": "dos_caras", "tipo": "checkbox", "label": "¿Dos caras?" },
-      { "campo": "letrero_parado", "tipo": "checkbox", "label": "¿Con Patas?" },
-      { "campo": "cambio_lona", "tipo": "checkbox", "label": "¿Cambio lona?" }
+      { "campo": "plastificado", "tipo": "checkbox", "label": "Plastificado" },
+      { "campo": "letrero_parado", "tipo": "checkbox", "label": "¿Con Patas?" }
     ]
-  }
+  },
+  "luminoso": {
+    "nombre": "Luminoso",
+    "precios": {
+      "una_cara": 530,
+      "dos_caras": 900,
+      "plastificado" :70
+    },
+    "opciones_ui": [
+      { "campo": "dos_caras", "tipo": "checkbox", "label": "Doble cara" },
+      { "campo": "plastificado", "tipo": "checkbox", "label": "Plastificado" }
+
+    ]
+  },
+  "cambioPanaflex" : {
+    "nombre" : "cambio panaflex",
+    "precios": {
+      "cambio_panaflex": 190,
+      "plastificado": 70,
+      "cambio_focos": 30
+    },
+    "opciones_ui": [
+      { "campo": "plastificado", "tipo": "checkbox", "label": "plastificado?" },
+      { "campo": "dos_caras", "tipo": "checkbox", "label": "dos caras" },
+      { "campo": "focos", "tipo": "number", "label": "¿focos" }
+    ]
+  },
+  "cambio_lona":{
+    "nombre": "cambio de lona",
+  "precios" : {
+    "cambio_lona" :150,
+    "plastificado": 70
+  } ,
+    "opciones_ui": [
+      { "campo": "dos_caras", "tipo": "checkbox", "label": "Doble cara" },
+      { "campo": "plastificado", "tipo": "checkbox", "label": "¿Plastificado?" }
+    ]
+ }
 }

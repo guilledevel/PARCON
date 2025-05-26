@@ -14,9 +14,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+@theme {
+    --primary: #00001C;
+    --secundary: #07EFE8;
+    --complement : #FF2B9A;
+} 
 
-/* @theme {
-    --primary= #00001C;
-    --secundary= #07EFE8;
-    --terciary = #FF2B9A
-} */
+
