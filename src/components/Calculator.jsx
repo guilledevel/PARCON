@@ -29,8 +29,9 @@ export default function Calculator() {
     }));
   }
 
-  // convertir las dimenciones de cm2 a m2
-  const areaM2 = (alto * largo) / 10000;
+  function redondear(precio) {
+    return Math.ceil(precio / 10) * 10;
+  }
 
   function calcularPrecio() {
     const altoNum = parseFloat(alto) || 0;
@@ -45,155 +46,209 @@ export default function Calculator() {
     let precioFinal = 0;
 
     // Lógica dinámica según las opciones seleccionadas
-    // Ejemplo para "banner"
+    // para "banner"
     if (tipo === "banner") {
-  const conVarilla = opciones["varilla"];
-  const precioBase = areaM2 * (conVarilla ? item.precios.conBarilla : item.precios.sinBarilla);
-  precioFinal = Math.ceil(precioBase / 10) * 10;
-}
+      let precioBase;
+
+      if (opciones["varilla"]) {
+        precioBase = areaM2 * item.precios.conVarilla;
+      } else {
+        precioBase = areaM2 * item.precios.impreso;
+      }
+      precioFinal = redondear(precioBase);
+    }
+
     //  "adhesivo"
     else if (tipo === "adhesivo") {
+      let precioBase;
+
       if (opciones["plastificado"] && opciones["instalacion"]) {
-        precioFinal = areaM2 * item.precios.plastificado_instalado;
+        precioBase = areaM2 * item.precios.plastificado_instalado;
       } else if (opciones["plastificado"]) {
-        precioFinal = areaM2 * item.precios.plastificado;
-      } else if (tipo === "adhesivo") {
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioFinal = areaM2 * item.precios.plastificado_instalado;
-        } else if (opciones["plastificado"]) {
-          precioFinal = areaM2 * item.precios.plastificado;
-        } else {
-          precioFinal = areaM2 * item.precios.impreso;
-        }
+        precioBase = areaM2 * item.precios.plastificado;
+      } else if (opciones["instalacion"]) {
+        precioBase = areaM2 * item.precios.instalacion;
+      } else {
+        precioBase = areaM2 * item.precios.impreso;
       }
 
-      
-    } 
-    
+      precioFinal = redondear(precioBase);
+    }
+
     // trabajo stikers
     else if (tipo === "sticker") {
+      let precioBase;
+
       const cantidad = parseInt(opciones["cantidad"]) || 0;
       const precioUnitario = areaM2 * item.precios.impreso;
       const precioCorte = item.precios.cortado;
-      precioFinal = (precioUnitario + precioCorte) * cantidad;
+
+      if (cantidad >= 50) {
+        precioBase = (precioUnitario + precioCorte) * cantidad;
+      } else {
+        alert("La cantidad mínima para stickers es 50 unidades.");
+        return;
+      }
+
+      precioFinal = redondear(precioBase);
     }
 
     // Trabajo "bastidor"
     else if (tipo === "bastidor") {
+      let precioBase;
+
       let unaCara = areaM2 * item.precios.una_cara;
       let dosCaras = areaM2 * item.precios.dos_caras;
       let plastificado = areaM2 * item.precios.plastificado;
       let precioPatas = item.precios.patas || 0;
 
-     if (opciones["dos_caras"] && opciones["plastificado"] && opciones["patas"]){
-      precioFinal = dosCaras + (plastificado *2) + precioPatas;
-     } 
-     else if (opciones["dos_caras"] && opciones["plastificado"]) {
-      precioFinal = dosCaras + (plastificado * 2) + precioPatas;
-     }
-     else if (opciones["dos_caras"]){
-      precioFinal = dosCaras + precioPatas;
-     }
-     else if (opciones["plastificado"]){
-      precioFinal = unaCara + plastificado + precioPatas;
-     }
-     else{
-      precioFinal = unaCara + precioPatas;
-     }
+      if ( opciones["dos_caras"] && opciones["plastificado"] && opciones["patas"]) {
+        precioBase = dosCaras + plastificado * 2 + precioPatas;
+      } 
+      else if ( opciones["plastificado"] && opciones["patas"]) {
+        precioBase = unaCara + plastificado  + precioPatas;
+      } 
+      else if ( opciones["dos_caras"]  && opciones["patas"]) {
+        precioBase = dosCaras  + precioPatas;
+      } 
+      else if (opciones["patas"]) {
+        precioBase = unaCara  + precioPatas;
+      } 
+      
+      else if (opciones["dos_caras"] && opciones["plastificado"]) {
+        precioBase = dosCaras + plastificado * 2 ;
+      } 
+      
+      else if (opciones["dos_caras"]) {
+        precioBase = dosCaras;
+      } 
+      
+      else if (opciones["plastificado"]) {
+        precioBase = unaCara + plastificado;
+      } 
+      
+      else {
+        precioBase = unaCara;
+      }
 
-
-
-
+      precioFinal = redondear(precioBase);
     }
     //trabajo "luminoso"
-    
     else if (tipo === "luminoso") {
-      //if (opciones["plastificado"] && opciones["instalacion"])
-      
+      let precioBase;
 
-      if(opciones["dos_caras"]  && opciones["plastificado"]){
-        let precioPlastificado = (areaM2 * item.precios.plastificado) *2;
-        let precioDosCaras = areaM2 * item.precios.dos_caras;
-        precioFinal = precioPlastificado + precioDosCaras;
-      } else if (opciones["dos_caras"]){
-        precioFinal = areaM2 * item.precios.dos_caras;
-      }
-      else if (opciones["plastificado"]){
-        let precioPlastificado = areaM2 * item.precios.plastificado;
-        let precioUnaCara = areaM2 * item.precios.una_cara;
-        precioFinal = precioPlastificado + precioUnaCara;
-      }
+      let unaCara = areaM2 * item.precios.una_cara;
+      let dosCaras = areaM2 * item.precios.dos_caras;
+      let plastificado = areaM2 * item.precios.plastificado;
+      let precioPatas = item.precios.patas || 0;
+
+      if ( opciones["dos_caras"] && opciones["plastificado"] && opciones["patas"]) {
+        precioBase = dosCaras + plastificado * 2 + precioPatas;
+      } 
+      else if ( opciones["plastificado"] && opciones["patas"]) {
+        precioBase = unaCara + plastificado  + precioPatas;
+      } 
+      else if ( opciones["dos_caras"]  && opciones["patas"]) {
+        precioBase = dosCaras  + precioPatas;
+      } 
+      else if (opciones["patas"]) {
+        precioBase = unaCara  + precioPatas;
+      } 
+      
+      else if (opciones["dos_caras"] && opciones["plastificado"]) {
+        precioBase = dosCaras + plastificado * 2 ;
+      } 
+      
+      else if (opciones["dos_caras"]) {
+        precioBase = dosCaras;
+      } 
+      
+      else if (opciones["plastificado"]) {
+        precioBase = unaCara + plastificado;
+      } 
+      
       else {
-        precioFinal = areaM2 * item.precios.una_cara;
+        precioBase = unaCara;
       }
+
+      precioFinal = redondear(precioBase);
     }
 
     // cambio panaflex
-    else if(tipo === "cambioPanaflex"){
+    else if (tipo === "cambioPanaflex") {
+      let precioBase;
+
       let precioPlastificado = areaM2 * item.precios.plastificado;
       let precioUnaCara = areaM2 * item.precios.cambio_panaflex;
 
       let cantidadFocos = parseInt(opciones["focos"]) || 0;
-      let precioFocos= cantidadFocos * item.precios.cambio_focos;
+      let precioFocos = cantidadFocos * item.precios.cambio_focos;
 
       if (opciones["plastificado"] && opciones["dos_caras"]) {
-        let precioDosCarasPlastificado = (precioPlastificado + precioUnaCara) * 2;
-        precioFinal = precioDosCarasPlastificado + precioFocos;
 
-      }else if (opciones["dos_caras"]){
-        precioFinal = (precioUnaCara * 2) + precioFocos;
-      }
-
-
-      else if (opciones["plastificado"]){
-        precioFinal = precioPlastificado + precioUnaCara + precioFocos;
+        let precioDosCarasPlastificado =
+          (precioPlastificado + precioUnaCara) * 2;
+        precioBase = precioDosCarasPlastificado + precioFocos;
       } 
+      
+      else if (opciones["dos_caras"]) {
+        precioBase = precioUnaCara * 2 + precioFocos;
+      } 
+      
       else if (opciones["plastificado"]) {
-        precioFinal = areaM2 * item.precios.cambio_panaflex + precioPlastificado + precioFocos;
+        precioBase = precioPlastificado + precioUnaCara + precioFocos;
       } 
-      else{
-        precioFinal = areaM2 * item.precios.cambio_panaflex + precioFocos;
+      
+      else if (opciones["plastificado"]) {
+        precioBase =
+          areaM2 * item.precios.cambio_panaflex +
+          precioPlastificado +
+          precioFocos;
+      } 
+      
+      else {
+        precioBase = areaM2 * item.precios.cambio_panaflex + precioFocos;
       }
-
+      precioFinal =redondear(precioBase);
     }
+
+
 
     // cambio de lona
-    else if(tipo === "cambio_lona"){
+    else if (tipo === "cambio_lona") {
+      let precioBase;
+
       let precioUnaCara = areaM2 * item.precios.cambio_lona;
       let precioPlastificado = areaM2 * item.precios.plastificado;
-      
 
-      if (opciones["plastificado"] && opciones["dos_caras"]){
+      if (opciones["plastificado"] && opciones["dos_caras"]) {
+        let precioDosCarasPlastificado =
+          (precioPlastificado + precioUnaCara) * 2;
 
-        let precioDosCarasPlastificado = (precioPlastificado + precioUnaCara) * 2;
-
-        precioFinal = precioDosCarasPlastificado;
-      }else if(opciones["dos_caras"]) {
-        precioFinal = precioUnaCara * 2;
-      } else if (opciones["plastificado"]){
-        precioFinal = precioPlastificado + precioUnaCara;
+        precioBase = precioDosCarasPlastificado;
+      } else if (opciones["dos_caras"]) {
+        precioBase = precioUnaCara * 2;
+      } else if (opciones["plastificado"]) {
+        precioBase = precioPlastificado + precioUnaCara;
       } else {
-        precioFinal = precioUnaCara;
+        precioBase = precioUnaCara;
       }
-
+      precioFinal = redondear(precioBase);
     }
 
-    setPrecio(Math.round(precioFinal).toLocaleString('es-BO'));
-
+    setPrecio(Math.round(precioFinal).toLocaleString("es-BO"));
   }
 
   // Render dinámico de checkboxes
   const opcionesUI = price[tipo]?.opciones_ui || [];
-
-
 
   // Renderizado del componente
   return (
     <div className="bg-gradient-to-r from-[#201053] to-[#1E5097] p-6 rounded-xl shadow-md w-full max-w-md text-white">
       <section className="flex flex-col gap-4">
         <div>
-          <label htmlFor="tipo" className="block mb-1 font-semibold">
-            Trabajo:
+          <label htmlFor="tipo" className="block mb-1 font-medium uppercase">
+            Cotiza el tipo de Trabajo:
           </label>
           <select
             value={tipo}
