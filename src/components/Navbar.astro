@@ -1,0 +1,29 @@
+---
+// filepath: src/components/Navbar.astro
+const { pathname } = Astro.url;
+const linkClass = (href) =>
+  pathname === href
+    ? "text-(--secundary) font-bold hover:text-(--complement)  transition duration-300 ease-in-out "
+    : "text-white hover:text-cyan-300 active:text-cyan-500  transition duration-300 ease-in-out ";
+const logoClass =
+  pathname === "/"
+    ? "text-cyan-400 font-bold text-2xl  transition duration-300 ease-in-out "
+    : "text-white hover:text-cyan-300 active:text-cyan-500 font-bold text-2xl  transition duration-300 ease-in-out ";
+---
+
+<div class="w-screen bg-black flex justify-center items-center">
+  <nav class="w-[90%] p-4 flex justify-between items-center">
+    <a href="/" class={logoClass}>Parcon</a>
+    <ul class="flex gap-6">
+      <li>
+        <a href="/" class={linkClass("/")}>Inicio</a>
+      </li>
+      <li>
+        <a href="/contacto" class={linkClass("/contacto")}>Contacto</a>
+      </li>
+      <li>
+        <a href="/cotizar" class={linkClass("/cotizar")}>Cotizar</a>
+      </li>
+    </ul>
+  </nav>
+</div>

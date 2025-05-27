@@ -253,10 +253,13 @@ export default function Calculator() {
           <select
             value={tipo}
             onChange={handleTipoChange}
-            className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white">
+            className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white
+            focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+              hover:bg-[#090A32] transition duration-300 ease-in-out
+            ">
             <option value="">Seleccionar tipo de trabajo</option>
             {Object.entries(price).map(([key, value]) => (
-              <option key={key} value={key} className="bg-[#090A32] text-white">
+              <option key={key} value={key} className="bg-[#090A32] text-white hover:bg-(--complement)">
                 {value.nombre}
               </option>
             ))}
@@ -268,16 +271,22 @@ export default function Calculator() {
           <div className="flex gap-2">
             <input
               type="number"
-              placeholder="Alto"
-              className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white"
+              placeholder="Alto (Cm.)"
+              className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
+              focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+              hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none
+              "
               value={alto}
               onChange={(e) => setAlto(e.target.value)}
               min="0"
             />
             <input
               type="number"
-              placeholder="Largo"
-              className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white"
+              placeholder="Largo (Cm.)"
+              className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
+              focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+              hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none
+              "
               value={largo}
               onChange={(e) => setLargo(e.target.value)}
               min="0"
@@ -319,8 +328,10 @@ export default function Calculator() {
         {/* boton para calcular el precio */}
         <button
           onClick={calcularPrecio}
-          className="bg-[#00EEEA] text-black font-bold uppercase py-2 rounded-2xl hover:bg-[#00c9c6] transition">
-          Calcular
+          className="bg-[#00EEEA] text-black font-bold uppercase py-2 rounded-2xl hover:bg-[#00c9c6] transition-colors active:bg-(--complement)
+          duration-300 ease-in-out w-full
+          ">
+          Cotizar precio
         </button>
 
         {/* muestra el precio total */}
@@ -329,7 +340,8 @@ export default function Calculator() {
           <input
             type="text"
             readOnly
-            className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white"
+            className="text-center text-4xl font-medium w-full p-2 border border-[#00EEEA] rounded-2xl text-white   focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+              hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
             value={`Bs. ${precio}`}
           />
         </div>
