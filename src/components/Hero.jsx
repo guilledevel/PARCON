@@ -1,5 +1,6 @@
 import ButtonCotizar from "./ButtonCotizar";
 import logo from "../assets/logo.webp";
+import Marquee from "./Marquee.tsx";
 
 export default function Hero() {
   return (
@@ -9,7 +10,9 @@ export default function Hero() {
       <p className="mt-4 text-lg">Publicidad digital e impresión con alto impacto <span class="text-(--secundary)">visual</span></p>
 
       <ButtonCotizar/>
-      <button></button>
+
+      <Marquee/>
+      <p>hola marquee</p>
     </section>
   );
 }
