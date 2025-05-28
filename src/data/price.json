@@ -12,8 +12,7 @@
   "sticker": {
     "nombre": "Sticker",
     "precios": {
-      "impreso": 140,
-      "cortado": 0.4
+      "impreso": 150
     },
     "opciones_ui": [
 

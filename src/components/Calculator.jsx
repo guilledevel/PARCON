@@ -81,10 +81,9 @@ export default function Calculator() {
 
       const cantidad = parseInt(opciones["cantidad"]) || 0;
       const precioUnitario = areaM2 * item.precios.impreso;
-      const precioCorte = item.precios.cortado;
 
       if (cantidad >= 50) {
-        precioBase = (precioUnitario + precioCorte) * cantidad;
+        precioBase = precioUnitario * cantidad;
       } else {
         alert("La cantidad mínima para stickers es 50 unidades.");
         return;
@@ -102,32 +101,25 @@ export default function Calculator() {
       let plastificado = areaM2 * item.precios.plastificado;
       let precioPatas = item.precios.patas || 0;
 
-      if ( opciones["dos_caras"] && opciones["plastificado"] && opciones["patas"]) {
+      if (
+        opciones["dos_caras"] &&
+        opciones["plastificado"] &&
+        opciones["patas"]
+      ) {
         precioBase = dosCaras + plastificado * 2 + precioPatas;
-      } 
-      else if ( opciones["plastificado"] && opciones["patas"]) {
-        precioBase = unaCara + plastificado  + precioPatas;
-      } 
-      else if ( opciones["dos_caras"]  && opciones["patas"]) {
-        precioBase = dosCaras  + precioPatas;
-      } 
-      else if (opciones["patas"]) {
-        precioBase = unaCara  + precioPatas;
-      } 
-      
-      else if (opciones["dos_caras"] && opciones["plastificado"]) {
-        precioBase = dosCaras + plastificado * 2 ;
-      } 
-      
-      else if (opciones["dos_caras"]) {
+      } else if (opciones["plastificado"] && opciones["patas"]) {
+        precioBase = unaCara + plastificado + precioPatas;
+      } else if (opciones["dos_caras"] && opciones["patas"]) {
+        precioBase = dosCaras + precioPatas;
+      } else if (opciones["patas"]) {
+        precioBase = unaCara + precioPatas;
+      } else if (opciones["dos_caras"] && opciones["plastificado"]) {
+        precioBase = dosCaras + plastificado * 2;
+      } else if (opciones["dos_caras"]) {
         precioBase = dosCaras;
-      } 
-      
-      else if (opciones["plastificado"]) {
+      } else if (opciones["plastificado"]) {
         precioBase = unaCara + plastificado;
-      } 
-      
-      else {
+      } else {
         precioBase = unaCara;
       }
 
@@ -142,32 +134,25 @@ export default function Calculator() {
       let plastificado = areaM2 * item.precios.plastificado;
       let precioPatas = item.precios.patas || 0;
 
-      if ( opciones["dos_caras"] && opciones["plastificado"] && opciones["patas"]) {
+      if (
+        opciones["dos_caras"] &&
+        opciones["plastificado"] &&
+        opciones["patas"]
+      ) {
         precioBase = dosCaras + plastificado * 2 + precioPatas;
-      } 
-      else if ( opciones["plastificado"] && opciones["patas"]) {
-        precioBase = unaCara + plastificado  + precioPatas;
-      } 
-      else if ( opciones["dos_caras"]  && opciones["patas"]) {
-        precioBase = dosCaras  + precioPatas;
-      } 
-      else if (opciones["patas"]) {
-        precioBase = unaCara  + precioPatas;
-      } 
-      
-      else if (opciones["dos_caras"] && opciones["plastificado"]) {
-        precioBase = dosCaras + plastificado * 2 ;
-      } 
-      
-      else if (opciones["dos_caras"]) {
+      } else if (opciones["plastificado"] && opciones["patas"]) {
+        precioBase = unaCara + plastificado + precioPatas;
+      } else if (opciones["dos_caras"] && opciones["patas"]) {
+        precioBase = dosCaras + precioPatas;
+      } else if (opciones["patas"]) {
+        precioBase = unaCara + precioPatas;
+      } else if (opciones["dos_caras"] && opciones["plastificado"]) {
+        precioBase = dosCaras + plastificado * 2;
+      } else if (opciones["dos_caras"]) {
         precioBase = dosCaras;
-      } 
-      
-      else if (opciones["plastificado"]) {
+      } else if (opciones["plastificado"]) {
         precioBase = unaCara + plastificado;
-      } 
-      
-      else {
+      } else {
         precioBase = unaCara;
       }
 
@@ -185,34 +170,23 @@ export default function Calculator() {
       let precioFocos = cantidadFocos * item.precios.cambio_focos;
 
       if (opciones["plastificado"] && opciones["dos_caras"]) {
-
         let precioDosCarasPlastificado =
           (precioPlastificado + precioUnaCara) * 2;
         precioBase = precioDosCarasPlastificado + precioFocos;
-      } 
-      
-      else if (opciones["dos_caras"]) {
+      } else if (opciones["dos_caras"]) {
         precioBase = precioUnaCara * 2 + precioFocos;
-      } 
-      
-      else if (opciones["plastificado"]) {
+      } else if (opciones["plastificado"]) {
         precioBase = precioPlastificado + precioUnaCara + precioFocos;
-      } 
-      
-      else if (opciones["plastificado"]) {
+      } else if (opciones["plastificado"]) {
         precioBase =
           areaM2 * item.precios.cambio_panaflex +
           precioPlastificado +
           precioFocos;
-      } 
-      
-      else {
+      } else {
         precioBase = areaM2 * item.precios.cambio_panaflex + precioFocos;
       }
-      precioFinal =redondear(precioBase);
+      precioFinal = redondear(precioBase);
     }
-
-
 
     // cambio de lona
     else if (tipo === "cambio_lona") {
@@ -259,7 +233,10 @@ export default function Calculator() {
             ">
             <option value="">Seleccionar tipo de trabajo</option>
             {Object.entries(price).map(([key, value]) => (
-              <option key={key} value={key} className="bg-[#090A32] text-white hover:bg-(--complement)">
+              <option
+                key={key}
+                value={key}
+                className="bg-[#090A32] text-white hover:bg-(--complement)">
                 {value.nombre}
               </option>
             ))}
@@ -316,7 +293,8 @@ export default function Calculator() {
                         [opt.campo]: e.target.value,
                       }))
                     }
-                    className="w-16 p-1 border border-[#00EEEA] rounded-2xl  text-white"
+                    className=" text-center w-16 p-1 border border-[#00EEEA] rounded-2xl  text-white focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+              hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
                   />
                 )}
                 {opt.label}
@@ -340,7 +318,7 @@ export default function Calculator() {
           <input
             type="text"
             readOnly
-            className="text-center text-4xl font-medium w-full p-2 border border-[#00EEEA] rounded-2xl text-white   focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+            className="text-center text-4xl font-medium w-full p-2 border border-(--secundary) rounded-2xl text-white   focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
               hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
             value={`Bs. ${precio}`}
           />
