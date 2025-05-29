@@ -1,0 +1,72 @@
+---
+// filepath: e:\DEV\PARCON\src\components\Cinta.astro
+import icons from '/public/data/icons.json';
+const allItems = [...icons, ...icons]; // duplicar para efecto de loop
+const duration = 30;
+const allIcons = icons.length
+console.log(allIcons);
+---
+
+
+
+ <div class="wrapper bg-gradient-to-r from-purple-500 to-cyan-400">
+
+    {allItems.map((icon, index) => (
+      <div class="item" 
+      
+      style={`
+      animation-delay: ${(duration / allIcons) * (allIcons - index - 1) * - 1}s
+      
+      `}>
+        <img src={icon.url} alt={icon.nombre} title={icon.nombre} class="h-7 w-auto" />
+      </div>
+    ))}
+  </div>
+
+<style>
+  
+
+  .wrapper {
+  
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 228px;
+
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1)20%,
+    rgba(0, 0, 0, 1)80%,
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.item {
+  display: flex;
+  width: 150px;
+  padding: 10px;
+  gap: 15px;
+  height: 40px;
+
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 8px;
+  position: absolute;
+  left: max(calc(130px * 16), 100%);
+  animation: scroll 30s linear infinite;
+}
+
+   
+@keyframes scroll {
+  to {
+    left: -100px;
+  }
+
+}
+</style>

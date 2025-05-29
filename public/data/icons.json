@@ -1,42 +1,42 @@
 [
   {
     "nombre": "Banner",
-    "icono": "/svg/Banner.svg",
+    "url": "/svg/Banner.svg",
     "alt": "Ícono de Banner"
   },
   {
     "nombre": "Neon",
-    "icono": "/svg/neon.svg",
+    "url": "/svg/Neon.svg",
     "alt": "Ícono de Neon"
   },
   {
     "nombre": "Tarjeta",
-    "icono": "/svg/tarjeta.svg",
+    "url": "/svg/Tarjeta.svg",
     "alt": "Ícono de Tarjeta"
   },
   {
     "nombre": "Talonario",
-    "icono": "/svg/talonario.svg",
+    "url": "/svg/Talonario.svg",
     "alt": "Ícono de Talonario"
   },
   {
     "nombre": "Bastidor",
-    "icono": "/svg/bastidor.svg",
+    "url": "/svg/Bastidor.svg",
     "alt": "Ícono de Bastidor"
   },
   {
     "nombre": "Stikers",
-    "icono": "/svg/stikers.svg",
+    "url": "/svg/Stikers.svg",
     "alt": "Ícono de Stikers"
   },
   {
     "nombre": "Luminoso",
-    "icono": "/svg/luminoso.svg",
+    "url": "/svg/Luminoso.svg",
     "alt": "Ícono de Luminoso"
   },
   {
     "nombre": "Adhesivo",
-    "icono": "/svg/adhesivo.svg",
+    "url": "/svg/Adhesivo.svg",
     "alt": "Ícono de Adhesivo"
   }
 ]

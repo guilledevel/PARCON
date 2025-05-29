@@ -1,6 +1,6 @@
 import ButtonCotizar from "./ButtonCotizar";
 import logo from "../assets/logo.webp";
-import Marquee from "./Marquee.tsx";
+
 
 export default function Hero() {
   return (
@@ -11,8 +11,6 @@ export default function Hero() {
 
       <ButtonCotizar/>
 
-      <Marquee/>
-      <p>hola marquee</p>
     </section>
   );
 }
