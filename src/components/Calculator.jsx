@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {costoArea,  redondear} from "../utils/CostoArea.js"
 import price from "../data/price.json";
 
 // Definimos el componente Calculator
@@ -29,18 +30,46 @@ export default function Calculator() {
     }));
   }
 
-  function redondear(precio) {
-    return Math.ceil(precio / 10) * 10;
-  }
+  // calculos matematicos dentro de input alto y largo
+  const handleEnterKey = (e, inputName) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const rawValue = e.target.value.trim();
+      const mathRegex = /^[\d\s\.\+\-\*\/\(\)]+$/;
+      let result;
+  
+      if (mathRegex.test(rawValue)) {
+        try {
+          result = Function(`"use strict"; return (${rawValue})`)();
+          if (!isNaN(result)) {
+            if (inputName === 'alto') setAlto(result);
+            if (inputName === 'largo') setLargo(result);
+          }
+        } catch (error) {
+          // Si falla el cálculo, seguimos con el flujo normal
+        }
+      }
+  
+      // Si el valor no es una expresión matemática válida o ya lo evaluamos
+      if (!mathRegex.test(rawValue) || isNaN(result)) {
+        if (inputName === 'alto') {
+          // Mover foco al input de largo
+          document.getElementById('input-largo').focus();
+        } else if (inputName === 'largo') {
+          // Ejecutar cálculo si estamos en el último input
+          calcularPrecio();
+        }
+      }
+    }
+  };
+  
+
 
   function calcularPrecio() {
     const altoNum = parseFloat(alto) || 0;
     const largoNum = parseFloat(largo) || 0;
     const areaM2 = (altoNum * largoNum) / 10000;
-    if (!tipo || (tipo !== "sticker" && areaM2 === 0)) {
-      setPrecio(0);
-      return;
-    }
+
 
     const item = price[tipo];
     let precioFinal = 0;
@@ -48,14 +77,10 @@ export default function Calculator() {
     // Lógica dinámica según las opciones seleccionadas
     // para "banner"
     if (tipo === "banner") {
-      let precioBase;
+      const costoUnitario = opciones["varilla"] ? item.precios.conVarilla : item.precios.base;
+    const precioBase = costoArea(altoNum, largoNum, costoUnitario);
+    precioFinal = redondear(precioBase);
 
-      if (opciones["varilla"]) {
-        precioBase = areaM2 * item.precios.conVarilla;
-      } else {
-        precioBase = areaM2 * item.precios.impreso;
-      }
-      precioFinal = redondear(precioBase);
     }
 
     //  "adhesivo"
@@ -247,6 +272,7 @@ export default function Calculator() {
           <label className="block mb-1 font-semibold">Dimensiones (Cm):</label>
           <div className="flex gap-2">
             <input
+            id="alto"
               type="number"
               placeholder="Alto (Cm.)"
               className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
@@ -255,9 +281,11 @@ export default function Calculator() {
               "
               value={alto}
               onChange={(e) => setAlto(e.target.value)}
+              onKeyDown={(e) => handleEnterKey(e, "alto")}
               min="0"
             />
             <input
+            id ="largo"
               type="number"
               placeholder="Largo (Cm.)"
               className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
@@ -266,6 +294,7 @@ export default function Calculator() {
               "
               value={largo}
               onChange={(e) => setLargo(e.target.value)}
+             /*  onKeyDown={(e) => handleEnterKey(e, "largo")} */
               min="0"
             />
           </div>
@@ -280,7 +309,7 @@ export default function Calculator() {
                   <input
                     type="checkbox"
                     checked={!!opciones[opt.campo]}
-                    onChange={() => handleOpcionChange(opt.campo)}
+                    /* onChange={() => handleOpcionChange(opt.campo)} */
                   />
                 ) : (
                   <input

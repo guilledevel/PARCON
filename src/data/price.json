@@ -2,7 +2,7 @@
   "banner": {
     "nombre": "Banner",
     "precios": {
-      "impreso": 120,
+      "base": 120,
       "conVarilla": 130
     },
     "opciones_ui": [
