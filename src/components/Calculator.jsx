@@ -31,7 +31,7 @@ export default function Calculator() {
   }
 
   // calculos matematicos dentro de input alto y largo
-  const handleEnterKey = (e, inputName) => {
+ /*  const handleEnterKey = (e, inputName) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       const rawValue = e.target.value.trim();
@@ -62,7 +62,7 @@ export default function Calculator() {
       }
     }
   };
-  
+   */
 
 
   function calcularPrecio() {
@@ -272,7 +272,7 @@ export default function Calculator() {
           <label className="block mb-1 font-semibold">Dimensiones (Cm):</label>
           <div className="flex gap-2">
             <input
-            id="alto"
+          
               type="number"
               placeholder="Alto (Cm.)"
               className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
@@ -281,11 +281,11 @@ export default function Calculator() {
               "
               value={alto}
               onChange={(e) => setAlto(e.target.value)}
-              onKeyDown={(e) => handleEnterKey(e, "alto")}
+              /* onKeyDown={(e) => handleEnterKey(e, "alto")} */
               min="0"
             />
             <input
-            id ="largo"
+            
               type="number"
               placeholder="Largo (Cm.)"
               className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
@@ -309,7 +309,7 @@ export default function Calculator() {
                   <input
                     type="checkbox"
                     checked={!!opciones[opt.campo]}
-                    /* onChange={() => handleOpcionChange(opt.campo)} */
+                     onChange={() => handleOpcionChange(opt.campo)} 
                   />
                 ) : (
                   <input
