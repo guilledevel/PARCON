@@ -1,13 +1,44 @@
 {
+  // Extiende la configuración estricta recomendada por Astro
   "extends": "astro/tsconfigs/strict",
+
+  // Archivos y patrones a incluir en la comprobación de tipos
   "include": [
-    ".astro/types.d.ts",
-    "**/*"
+    ".astro/types.d.ts", // Tipos generados por Astro
+    "**/*"               // Todos los archivos del proyecto
   ],
+
+  // Archivos y carpetas a excluir de la comprobación de tipos
   "exclude": [
-    "dist"
+    "dist" // Carpeta de salida de compilación
   ],
+
   "compilerOptions": {
+    "baseUrl": ".", // Base para las rutas relativas
+
+    // Alias de rutas para importaciones más limpias
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@/components": [
+        "src/components/*"
+      ],
+      "@/hooks": [
+        "src/hooks/*"
+      ],
+      "@/icons": [
+        "src/icons/*"
+      ],
+      "@/lib": [
+        "src/lib/*"
+      ],
+      "@/services": [
+        "src/services/*"
+      ]
+    },
+
+    // Configuración para soportar JSX con React
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   }
