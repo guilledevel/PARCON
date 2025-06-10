@@ -64,6 +64,28 @@ export default function Calculator() {
   };
    */
 
+  // calcullar adhesivo
+/*   const inicio = 15;
+const fin = 140;
+const pasos = 10;
+
+const incremento = (fin - inicio) / (pasos - 1);
+
+for (let i = 0; i < pasos; i++) {
+  const numero = inicio + i * incremento;
+  console.log(numero.toFixed(0));
+}
+
+let area = 0.024
+
+if(area<=0.01){
+  console.log("tamaño 10 x 10");
+}  else if (area <= 0.04){
+  
+  let base = area * 725;
+  console.log(`el precio de tamaño 24 x 10 es:  ${base}`);
+}
+ */
 
   function calcularPrecio() {
     const altoNum = parseFloat(alto) || 0;
