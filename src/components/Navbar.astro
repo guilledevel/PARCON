@@ -10,14 +10,43 @@ const logoClass =
   pathname === "/"
     ? "text-cyan-400 font-bold text-2xl  transition duration-300 ease-in-out "
     : "text-white hover:text-cyan-300 active:text-cyan-500 font-bold text-2xl  transition duration-300 ease-in-out ";
+
+let isOpen = false;
+function toggleMenu() {
+  isOpen = !isOpen;
+}
 ---
 
-<div class="w-screen  bg-black flex justify-center items-center">
-  <nav class="w-[90%] p-4 flex justify-between items-center">
-    <a href="/" class={logoClass}>Parcon
-      <!-- <img src={logo.src} alt="Parcon Logo" class="inline-block w-[50px]  ml-2" /> -->
-    </a>
-    <ul class="flex gap-6">
+<div class="w-screen bg-black flex justify-center items-center">
+  <nav class="w-[90%] p-4 flex justify-between items-center relative">
+    <a href="/" class={logoClass}>Parcon</a>
+    
+    <!-- Botón hamburguesa -->
+    <button 
+      class="md:hidden text-white focus:outline-none"
+      onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"
+      aria-label="Abrir menú"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+
+    <!-- Menú navegación -->
+    <ul class="hidden md:flex gap-6">
+      <li>
+        <a href="/" class={linkClass("/")}>Inicio</a>
+      </li>
+      <li>
+        <a href="/contacto" class={linkClass("/contacto")}>Contacto</a>
+      </li>
+      <li>
+        <a href="/cotizar" class={linkClass("/cotizar")}>Cotizar</a>
+      </li>
+    </ul>
+
+    <!-- Menú móvil -->
+    <ul id="mobileMenu" class="absolute top-full left-0 w-full bg-black flex-col gap-4 px-4 py-2 md:hidden hidden">
       <li>
         <a href="/" class={linkClass("/")}>Inicio</a>
       </li>
