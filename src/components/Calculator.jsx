@@ -265,25 +265,35 @@ if(area<=0.01){
 
   // Renderizado del componente
   return (
-    <div className="bg-gradient-to-r from-[#201053] to-[#1E5097] p-6 rounded-xl shadow-md w-full max-w-md text-white">
-      <section className="flex flex-col gap-4">
+  <form
+    onSubmit={(e) => {
+      e.preventDefault();
+      calcularPrecio();
+    }}
+    className="bg-gradient-to-r from-[#201053] to-[#1E5097] p-6 rounded-xl shadow-md w-full max-w-md text-white"
+    aria-labelledby="form-title"
+  >
+    <section className="flex flex-col gap-4" role="group" aria-label="Formulario de cotización">
+      <fieldset className="space-y-2">
+        <legend id="form-title" className="text-lg font-bold mb-2">Cotiza tu trabajo</legend>
+
         <div>
           <label htmlFor="tipo" className="block mb-1 font-medium uppercase">
             Cotiza el tipo de Trabajo:
           </label>
           <select
+            id="tipo"
+            name="tipo"
             value={tipo}
             onChange={handleTipoChange}
             className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white
-            focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
-              hover:bg-[#090A32] transition duration-300 ease-in-out
-            ">
+              focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+              hover:bg-[#090A32] transition duration-300 ease-in-out"
+            required
+          >
             <option value="">Seleccionar tipo de trabajo</option>
             {Object.entries(price).map(([key, value]) => (
-              <option
-                key={key}
-                value={key}
-                className="bg-[#090A32] text-white hover:bg-(--complement)">
+              <option key={key} value={key} className="bg-[#090A32] text-white">
                 {value.nombre}
               </option>
             ))}
@@ -294,87 +304,98 @@ if(area<=0.01){
           <label className="block mb-1 font-semibold">Dimensiones (Cm):</label>
           <div className="flex gap-2">
             <input
-          
               type="number"
+              id="alto"
+              name="alto"
               placeholder="Alto (Cm.)"
               className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
-              focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
-              hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none
-              "
+                focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+                hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
               value={alto}
               onChange={(e) => setAlto(e.target.value)}
-              /* onKeyDown={(e) => handleEnterKey(e, "alto")} */
               min="0"
+              required
             />
             <input
-            
               type="number"
+              id="largo"
+              name="largo"
               placeholder="Largo (Cm.)"
               className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
-              focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
-              hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none
-              "
+                focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+                hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
               value={largo}
               onChange={(e) => setLargo(e.target.value)}
-             /*  onKeyDown={(e) => handleEnterKey(e, "largo")} */
               min="0"
+              required
             />
           </div>
         </div>
+      </fieldset>
 
-        {/* Opciones dinámicas */}
-        {opcionesUI.length > 0 && (
-          <div className="flex items-center gap-4 flex-wrap">
-            {opcionesUI.map((opt) => (
-              <label key={opt.campo} className="flex items-center gap-2">
-                {opt.tipo === "checkbox" ? (
-                  <input
-                    type="checkbox"
-                    checked={!!opciones[opt.campo]}
-                     onChange={() => handleOpcionChange(opt.campo)} 
-                  />
-                ) : (
-                  <input
-                    type="number"
-                    min="1"
-                    value={opciones[opt.campo] || ""}
-                    onChange={(e) =>
-                      setOpciones((prev) => ({
-                        ...prev,
-                        [opt.campo]: e.target.value,
-                      }))
-                    }
-                    className=" text-center w-16 p-1 border border-[#00EEEA] rounded-2xl  text-white focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
-              hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
-                  />
-                )}
-                {opt.label}
-              </label>
-            ))}
-          </div>
-        )}
+      {/* Opciones dinámicas */}
+      {opcionesUI.length > 0 && (
+        <fieldset className="flex items-center gap-4 flex-wrap">
+          <legend className="sr-only">Opciones adicionales</legend>
+          {opcionesUI.map((opt) => (
+            <label key={opt.campo} className="flex items-center gap-2">
+              {opt.tipo === "checkbox" ? (
+                <input
+                  type="checkbox"
+                  name={opt.campo}
+                  checked={!!opciones[opt.campo]}
+                  onChange={() => handleOpcionChange(opt.campo)}
+                />
+              ) : (
+                <input
+                  type="number"
+                  name={opt.campo}
+                  min="1"
+                  value={opciones[opt.campo] || ""}
+                  onChange={(e) =>
+                    setOpciones((prev) => ({
+                      ...prev,
+                      [opt.campo]: e.target.value,
+                    }))
+                  }
+                  className="text-center w-16 p-1 border border-[#00EEEA] rounded-2xl text-white
+                    focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+                    hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
+                />
+              )}
+              {opt.label}
+            </label>
+          ))}
+        </fieldset>
+      )}
 
-        {/* boton para calcular el precio */}
-        <button
-          onClick={calcularPrecio}
-          className="bg-[#00EEEA] text-black font-bold uppercase py-2 rounded-2xl hover:bg-[#00c9c6] transition-colors active:bg-(--complement)
-          duration-300 ease-in-out w-full
-          ">
-          Cotizar precio
-        </button>
+      {/* Botón para calcular precio */}
+      <button
+        type="submit"
+        className="bg-[#00EEEA] text-black font-bold uppercase py-2 rounded-2xl hover:bg-[#00c9c6] transition-colors active:bg-(--complement)
+          duration-300 ease-in-out w-full"
+      >
+        Cotizar precio
+      </button>
 
-        {/* muestra el precio total */}
-        <div>
-          <label className="block mb-1 font-semibold">Precio total: Bs.</label>
-          <input
-            type="text"
-            readOnly
-            className="text-center text-4xl font-medium w-full p-2 border border-(--secundary) rounded-2xl text-white   focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
-              hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
-            value={`Bs. ${precio}`}
-          />
-        </div>
-      </section>
-    </div>
-  );
+      {/* Mostrar el precio total */}
+      <div>
+        <label htmlFor="precio" className="block mb-1 font-semibold">
+          Precio total: Bs.
+        </label>
+        <input
+          type="text"
+          id="precio"
+          name="precio"
+          readOnly
+          className="text-center text-4xl font-medium w-full p-2 border border-(--secundary) rounded-2xl text-white
+            focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+            hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
+          value={`Bs. ${precio}`}
+        />
+      </div>
+    </section>
+  </form>
+);
+
 }
