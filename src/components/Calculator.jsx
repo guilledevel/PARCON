@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { costoArea, redondear } from "../utils/CostoArea.js";
+import { costoArea, redondear,  } from "../utils/CostoArea.js";
 import price from "../data/price.json";
 
 // Definimos el componente Calculator
@@ -66,10 +66,10 @@ export default function Calculator() {
       let precioBase;
 
       const cantidad = parseInt(opciones["cantidad"]) || 0;
-      const precioUnitario = costoArea(altoNum, largoNum, item.precios.base);
+      const precioUnitario = costoArea(altoNum, largoNum, item.precios.base).precio;
 
       if (cantidad >= 50) {
-        precioBase = precioUnitario.precio * cantidad;
+        precioBase = precioUnitario * cantidad;
       } else {
         alert("La cantidad mínima para stickers es 50 unidades.");
         return;
@@ -324,13 +324,13 @@ export default function Calculator() {
     else if (tipo === "bastidor") {
       let precioBase;
 
-      let unaCara = costoArea(altoNum, largoNum, item.precios.base);
-      let dosCaras = costoArea(altoNum, largoNum, item.precios.dosCaras);
+      let unaCara = costoArea(altoNum, largoNum, item.precios.base).precio;
+      let dosCaras = costoArea(altoNum, largoNum, item.precios.dosCaras).precio;
       let plastificado = costoArea(
         altoNum,
         largoNum,
         item.precios.plastificado
-      );
+      ).precio;
       let precioPatas = item.precios.patas || 0;
 
       if (
@@ -361,13 +361,13 @@ export default function Calculator() {
     else if (tipo === "luminoso") {
       let precioBase;
 
-      let unaCara = costoArea(altoNum, largoNum, item.precios.base);
-      let dosCaras = costoArea(altoNum, largoNum, item.precios.dosCaras);
+      let unaCara = costoArea(altoNum, largoNum, item.precios.base).precio;
+      let dosCaras = costoArea(altoNum, largoNum, item.precios.dosCaras).precio;
       let plastificado = costoArea(
         altoNum,
         largoNum,
         item.precios.plastificado
-      );
+      ).precio;
       let precioPatas = item.precios.patas || 0;
 
       if (
@@ -403,8 +403,8 @@ export default function Calculator() {
         altoNum,
         largoNum,
         item.precios.plastificado
-      );
-      let precioUnaCara = costoArea(altoNum, largoNum, item.precios.base);
+      ).precio;
+      let precioUnaCara = costoArea(altoNum, largoNum, item.precios.base).precio;
 
       let cantidadFocos = parseInt(opciones["focos"]) || 0;
       let precioFocos = cantidadFocos * item.precios.cambio_focos;
@@ -424,7 +424,7 @@ export default function Calculator() {
           precioFocos;
       } else {
         precioBase =
-          costoArea(altoNum, largoNum, item.precios.base) + precioFocos;
+          costoArea(altoNum, largoNum, item.precios.base).precio + precioFocos;
       }
       precioFinal = redondear(precioBase);
     }
@@ -433,12 +433,12 @@ export default function Calculator() {
     else if (tipo === "cambioLona") {
       let precioBase;
 
-      let precioUnaCara = costoArea(altoNum, largoNum, item.precios.base);
+      let precioUnaCara = costoArea(altoNum, largoNum, item.precios.base).precio;
       let precioPlastificado = costoArea(
         altoNum,
         largoNum,
         item.precios.plastificado
-      );
+      ).precio;
 
       if (opciones["plastificado"] && opciones["dos_caras"]) {
         let precioDosCarasPlastificado =
