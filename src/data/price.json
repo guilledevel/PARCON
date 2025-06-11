@@ -3,7 +3,7 @@
     "nombre": "Banner",
     "precios": {
       "base": 120,
-      "conVarilla": 130
+      "varilla": 130
     },
     "opciones_ui": [
       { "campo": "varilla", "tipo": "checkbox", "label": "¿Con varilla?" }
@@ -12,7 +12,7 @@
   "sticker": {
     "nombre": "Sticker",
     "precios": {
-      "impreso": 150
+      "base": 150
     },
     "opciones_ui": [
 
@@ -22,10 +22,9 @@
   "adhesivo": {
     "nombre": "Adhesivo",
     "precios": {
-      "impreso": 140,
-      "plastificado": 210,
-      "plastificado_instalado": 250,
-      "instalacion": 190
+      "base": 140, 
+      "plastificado": 70,
+      "instalacion": 40
     },
     "opciones_ui": [
       { "campo": "plastificado", "tipo": "checkbox", "label": "¿Plastificado?" },
@@ -35,8 +34,8 @@
   "bastidor": {
     "nombre": "Bastidor",
     "precios": {
-      "una_cara": 180,
-      "dos_caras": 290,
+      "base": 180,
+      "dosCaras": 290,
       "plastificado": 70,
       "patas": 120
     },
@@ -49,8 +48,8 @@
   "luminoso": {
     "nombre": "Luminoso",
     "precios": {
-      "una_cara": 530,
-      "dos_caras": 900,
+      "base": 530,
+      "dosCaras": 900,
       "plastificado": 70,
       "patas": 120
     },
@@ -64,9 +63,9 @@
   "cambioPanaflex" : {
     "nombre" : "cambio panaflex",
     "precios": {
-      "cambio_panaflex": 190,
+      "base": 190,
       "plastificado": 70,
-      "cambio_focos": 30
+      "cambio_focos": 40
     },
     "opciones_ui": [
       { "campo": "plastificado", "tipo": "checkbox", "label": "plastificado?" },
@@ -74,10 +73,10 @@
       { "campo": "focos", "tipo": "number", "label": "¿focos" }
     ]
   },
-  "cambio_lona":{
+  "cambioLona":{
     "nombre": "cambio de lona",
   "precios" : {
-    "cambio_lona" :150,
+    "base" :150,
     "plastificado": 70
   } ,
     "opciones_ui": [

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {costoArea,  redondear} from "../utils/CostoArea.js"
+import { costoArea, redondear } from "../utils/CostoArea.js";
 import price from "../data/price.json";
 
 // Definimos el componente Calculator
@@ -9,6 +9,20 @@ export default function Calculator() {
   const [largo, setLargo] = useState("");
   const [precio, setPrecio] = useState(0);
   const [opciones, setOpciones] = useState({});
+
+  //tabla de precios adsivo
+  const tablaAdhesivo = [
+    { m2: 0.01, base: 1500 },
+    { m2: 0.04, base: 725 },
+    { m2: 0.09, base: 478 },
+    { m2: 0.16, base: 356 },
+    { m2: 0.25, base: 284 },
+    { m2: 0.36, base: 233 },
+    { m2: 0.49, base: 200 },
+    { m2: 0.64, base: 175 },
+    { m2: 0.81, base: 156 },
+    { m2: 1.0, base: 140 },
+  ];
 
   // Cuando cambia el tipo resetea las opciones menos alto y largo
   const handleTipoChange = (e) => {
@@ -30,68 +44,10 @@ export default function Calculator() {
     }));
   }
 
-  // calculos matematicos dentro de input alto y largo
- /*  const handleEnterKey = (e, inputName) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const rawValue = e.target.value.trim();
-      const mathRegex = /^[\d\s\.\+\-\*\/\(\)]+$/;
-      let result;
-  
-      if (mathRegex.test(rawValue)) {
-        try {
-          result = Function(`"use strict"; return (${rawValue})`)();
-          if (!isNaN(result)) {
-            if (inputName === 'alto') setAlto(result);
-            if (inputName === 'largo') setLargo(result);
-          }
-        } catch (error) {
-          // Si falla el cálculo, seguimos con el flujo normal
-        }
-      }
-  
-      // Si el valor no es una expresión matemática válida o ya lo evaluamos
-      if (!mathRegex.test(rawValue) || isNaN(result)) {
-        if (inputName === 'alto') {
-          // Mover foco al input de largo
-          document.getElementById('input-largo').focus();
-        } else if (inputName === 'largo') {
-          // Ejecutar cálculo si estamos en el último input
-          calcularPrecio();
-        }
-      }
-    }
-  };
-   */
-
-  // calcullar adhesivo
-/*   const inicio = 15;
-const fin = 140;
-const pasos = 10;
-
-const incremento = (fin - inicio) / (pasos - 1);
-
-for (let i = 0; i < pasos; i++) {
-  const numero = inicio + i * incremento;
-  console.log(numero.toFixed(0));
-}
-
-let area = 0.024
-
-if(area<=0.01){
-  console.log("tamaño 10 x 10");
-}  else if (area <= 0.04){
-  
-  let base = area * 725;
-  console.log(`el precio de tamaño 24 x 10 es:  ${base}`);
-}
- */
-
   function calcularPrecio() {
     const altoNum = parseFloat(alto) || 0;
     const largoNum = parseFloat(largo) || 0;
-    const areaM2 = (altoNum * largoNum) / 10000;
-
+    // const areaM2 = (altoNum * largoNum) / 10000;
 
     const item = price[tipo];
     let precioFinal = 0;
@@ -99,38 +55,21 @@ if(area<=0.01){
     // Lógica dinámica según las opciones seleccionadas
     // para "banner"
     if (tipo === "banner") {
-      const costoUnitario = opciones["varilla"] ? item.precios.conVarilla : item.precios.base;
-    const precioBase = costoArea(altoNum, largoNum, costoUnitario);
-    precioFinal = redondear(precioBase);
-
+      const costoUnitario = opciones["varilla"]
+        ? item.precios.varilla
+        : item.precios.base;
+      const precioBase = costoArea(altoNum, largoNum, costoUnitario);
+      precioFinal = redondear(precioBase.precio);
     }
-
-    //  "adhesivo"
-    else if (tipo === "adhesivo") {
-      let precioBase;
-
-      if (opciones["plastificado"] && opciones["instalacion"]) {
-        precioBase = areaM2 * item.precios.plastificado_instalado;
-      } else if (opciones["plastificado"]) {
-        precioBase = areaM2 * item.precios.plastificado;
-      } else if (opciones["instalacion"]) {
-        precioBase = areaM2 * item.precios.instalacion;
-      } else {
-        precioBase = areaM2 * item.precios.impreso;
-      }
-
-      precioFinal = redondear(precioBase);
-    }
-
     // trabajo stikers
     else if (tipo === "sticker") {
       let precioBase;
 
       const cantidad = parseInt(opciones["cantidad"]) || 0;
-      const precioUnitario = areaM2 * item.precios.impreso;
+      const precioUnitario = costoArea(altoNum, largoNum, item.precios.base);
 
       if (cantidad >= 50) {
-        precioBase = precioUnitario * cantidad;
+        precioBase = precioUnitario.precio * cantidad;
       } else {
         alert("La cantidad mínima para stickers es 50 unidades.");
         return;
@@ -139,13 +78,259 @@ if(area<=0.01){
       precioFinal = redondear(precioBase);
     }
 
+    //  "adhesivo"
+    else if (tipo === "adhesivo") {
+      //recuperamos el tamaño  de area
+      const area = costoArea(altoNum, largoNum);
+      //declaramos la variable de precio
+      let precioBase;
+      //creamos la logica si area es menor a 1
+      if (area.area <= 0.01) {
+        let base = (item.precios.base = tablaAdhesivo[0].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 0.04) {
+        let base = (item.precios.base = tablaAdhesivo[1].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 0.09) {
+        let base = (item.precios.base = tablaAdhesivo[2].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 0.16) {
+        let base = (item.precios.base = tablaAdhesivo[3].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 0.25) {
+        let base = (item.precios.base = tablaAdhesivo[4].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 0.36) {
+       let base = (item.precios.base = tablaAdhesivo[5].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 0.49) {
+         let base = (item.precios.base = tablaAdhesivo[6].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 0.64) {
+         let base = (item.precios.base = tablaAdhesivo[7].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 0.81) {
+         let base = (item.precios.base = tablaAdhesivo[8].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else if (area.area <= 1.0) {
+         let base = (item.precios.base = tablaAdhesivo[9].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      } else {
+         let base = (item.precios.base = tablaAdhesivo[9].base);
+        let basePlastificado = (item.precios.plastificado = base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base).precio;
+        let costoPlastificado = costoArea(
+          altoNum,
+          largoNum,
+          basePlastificado
+        ).precio;
+        let precioInstalacion = area.area * item.precios.instalacion;
+
+        if (opciones["plastificado"] && opciones["instalacion"]) {
+          precioBase = costoBase + costoPlastificado + precioInstalacion;
+        } else if (opciones["plastificado"]) {
+          precioBase = costoBase + costoPlastificado;
+        } else if (opciones["instalacion"]) {
+          precioBase = costoBase + precioInstalacion;
+        } else {
+          precioBase = costoBase;
+        }
+      }
+      precioFinal = redondear(precioBase);
+    }
+
     // Trabajo "bastidor"
     else if (tipo === "bastidor") {
       let precioBase;
 
-      let unaCara = areaM2 * item.precios.una_cara;
-      let dosCaras = areaM2 * item.precios.dos_caras;
-      let plastificado = areaM2 * item.precios.plastificado;
+      let unaCara = costoArea(altoNum, largoNum, item.precios.base);
+      let dosCaras = costoArea(altoNum, largoNum, item.precios.dosCaras);
+      let plastificado = costoArea(
+        altoNum,
+        largoNum,
+        item.precios.plastificado
+      );
       let precioPatas = item.precios.patas || 0;
 
       if (
@@ -176,9 +361,13 @@ if(area<=0.01){
     else if (tipo === "luminoso") {
       let precioBase;
 
-      let unaCara = areaM2 * item.precios.una_cara;
-      let dosCaras = areaM2 * item.precios.dos_caras;
-      let plastificado = areaM2 * item.precios.plastificado;
+      let unaCara = costoArea(altoNum, largoNum, item.precios.base);
+      let dosCaras = costoArea(altoNum, largoNum, item.precios.dosCaras);
+      let plastificado = costoArea(
+        altoNum,
+        largoNum,
+        item.precios.plastificado
+      );
       let precioPatas = item.precios.patas || 0;
 
       if (
@@ -210,8 +399,12 @@ if(area<=0.01){
     else if (tipo === "cambioPanaflex") {
       let precioBase;
 
-      let precioPlastificado = areaM2 * item.precios.plastificado;
-      let precioUnaCara = areaM2 * item.precios.cambio_panaflex;
+      let precioPlastificado = costoArea(
+        altoNum,
+        largoNum,
+        item.precios.plastificado
+      );
+      let precioUnaCara = costoArea(altoNum, largoNum, item.precios.base);
 
       let cantidadFocos = parseInt(opciones["focos"]) || 0;
       let precioFocos = cantidadFocos * item.precios.cambio_focos;
@@ -230,17 +423,22 @@ if(area<=0.01){
           precioPlastificado +
           precioFocos;
       } else {
-        precioBase = areaM2 * item.precios.cambio_panaflex + precioFocos;
+        precioBase =
+          costoArea(altoNum, largoNum, item.precios.base) + precioFocos;
       }
       precioFinal = redondear(precioBase);
     }
 
     // cambio de lona
-    else if (tipo === "cambio_lona") {
+    else if (tipo === "cambioLona") {
       let precioBase;
 
-      let precioUnaCara = areaM2 * item.precios.cambio_lona;
-      let precioPlastificado = areaM2 * item.precios.plastificado;
+      let precioUnaCara = costoArea(altoNum, largoNum, item.precios.base);
+      let precioPlastificado = costoArea(
+        altoNum,
+        largoNum,
+        item.precios.plastificado
+      );
 
       if (opciones["plastificado"] && opciones["dos_caras"]) {
         let precioDosCarasPlastificado =
@@ -265,137 +463,143 @@ if(area<=0.01){
 
   // Renderizado del componente
   return (
-  <form
-    onSubmit={(e) => {
-      e.preventDefault();
-      calcularPrecio();
-    }}
-    className="bg-gradient-to-r from-[#201053] to-[#1E5097] p-6 rounded-xl shadow-md w-full max-w-md text-white"
-    aria-labelledby="form-title"
-  >
-    <section className="flex flex-col gap-4" role="group" aria-label="Formulario de cotización">
-      <fieldset className="space-y-2">
-        <legend id="form-title" className="text-lg font-bold mb-2">Cotiza tu trabajo</legend>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        calcularPrecio();
+      }}
+      className="bg-gradient-to-r from-[#201053] to-[#1E5097] p-6 rounded-xl shadow-md w-full max-w-md text-white"
+      aria-labelledby="form-title">
+      <section
+        className="flex flex-col gap-4"
+        role="group"
+        aria-label="Formulario de cotización">
+        <fieldset className="space-y-2">
+          <legend id="form-title" className="text-lg font-bold mb-2">
+            Cotiza tu trabajo
+          </legend>
 
-        <div>
-          <label htmlFor="tipo" className="block mb-1 font-medium uppercase">
-            Cotiza el tipo de Trabajo:
-          </label>
-          <select
-            id="tipo"
-            name="tipo"
-            value={tipo}
-            onChange={handleTipoChange}
-            className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white
+          <div>
+            <label htmlFor="tipo" className="block mb-1 font-medium uppercase">
+              Cotiza el tipo de Trabajo:
+            </label>
+            <select
+              id="tipo"
+              name="tipo"
+              value={tipo}
+              onChange={handleTipoChange}
+              className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white
               focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
               hover:bg-[#090A32] transition duration-300 ease-in-out"
-            required
-          >
-            <option value="">Seleccionar tipo de trabajo</option>
-            {Object.entries(price).map(([key, value]) => (
-              <option key={key} value={key} className="bg-[#090A32] text-white">
-                {value.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className="block mb-1 font-semibold">Dimensiones (Cm):</label>
-          <div className="flex gap-2">
-            <input
-              type="number"
-              id="alto"
-              name="alto"
-              placeholder="Alto (Cm.)"
-              className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
-                focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
-                hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
-              value={alto}
-              onChange={(e) => setAlto(e.target.value)}
-              min="0"
-              required
-            />
-            <input
-              type="number"
-              id="largo"
-              name="largo"
-              placeholder="Largo (Cm.)"
-              className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
-                focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
-                hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
-              value={largo}
-              onChange={(e) => setLargo(e.target.value)}
-              min="0"
-              required
-            />
+              required>
+              <option value="">Seleccionar tipo de trabajo</option>
+              {Object.entries(price).map(([key, value]) => (
+                <option
+                  key={key}
+                  value={key}
+                  className="bg-[#090A32] text-white">
+                  {value.nombre}
+                </option>
+              ))}
+            </select>
           </div>
-        </div>
-      </fieldset>
 
-      {/* Opciones dinámicas */}
-      {opcionesUI.length > 0 && (
-        <fieldset className="flex items-center gap-4 flex-wrap">
-          <legend className="sr-only">Opciones adicionales</legend>
-          {opcionesUI.map((opt) => (
-            <label key={opt.campo} className="flex items-center gap-2">
-              {opt.tipo === "checkbox" ? (
-                <input
-                  type="checkbox"
-                  name={opt.campo}
-                  checked={!!opciones[opt.campo]}
-                  onChange={() => handleOpcionChange(opt.campo)}
-                />
-              ) : (
-                <input
-                  type="number"
-                  name={opt.campo}
-                  min="1"
-                  value={opciones[opt.campo] || ""}
-                  onChange={(e) =>
-                    setOpciones((prev) => ({
-                      ...prev,
-                      [opt.campo]: e.target.value,
-                    }))
-                  }
-                  className="text-center w-16 p-1 border border-[#00EEEA] rounded-2xl text-white
+          <div>
+            <label className="block mb-1 font-semibold">
+              Dimensiones (Cm):
+            </label>
+            <div className="flex gap-2">
+              <input
+                type="number"
+                id="alto"
+                name="alto"
+                placeholder="Alto (Cm.)"
+                className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
+                focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+                hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
+                value={alto}
+                onChange={(e) => setAlto(e.target.value)}
+                min="0"
+                required
+              />
+              <input
+                type="number"
+                id="largo"
+                name="largo"
+                placeholder="Largo (Cm.)"
+                className="w-full p-2 border border-[#00EEEA] rounded-2xl text-white text-center
+                focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
+                hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
+                value={largo}
+                onChange={(e) => setLargo(e.target.value)}
+                min="0"
+                required
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        {/* Opciones dinámicas */}
+        {opcionesUI.length > 0 && (
+          <fieldset className="flex items-center gap-4 flex-wrap">
+            <legend className="sr-only">Opciones adicionales</legend>
+            {opcionesUI.map((opt) => (
+              <label key={opt.campo} className="flex items-center gap-2">
+                {opt.tipo === "checkbox" ? (
+                  <input
+                    type="checkbox"
+                    name={opt.campo}
+                    checked={!!opciones[opt.campo]}
+                    onChange={() => handleOpcionChange(opt.campo)}
+                  />
+                ) : (
+                  <input
+                    type="number"
+                    name={opt.campo}
+                    min="1"
+                    value={opciones[opt.campo] || ""}
+                    onChange={(e) =>
+                      setOpciones((prev) => ({
+                        ...prev,
+                        [opt.campo]: e.target.value,
+                      }))
+                    }
+                    className="text-center w-16 p-1 border border-[#00EEEA] rounded-2xl text-white
                     focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
                     hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
-                />
-              )}
-              {opt.label}
-            </label>
-          ))}
-        </fieldset>
-      )}
+                  />
+                )}
+                {opt.label}
+              </label>
+            ))}
+          </fieldset>
+        )}
 
-      {/* Botón para calcular precio */}
-      <button
-        type="submit"
-        className="bg-[#00EEEA] text-black font-bold uppercase py-2 rounded-2xl hover:bg-[#00c9c6] transition-colors active:bg-(--complement)
-          duration-300 ease-in-out w-full"
-      >
-        Cotizar precio
-      </button>
+        {/* Botón para calcular precio */}
+        <button
+          type="submit"
+          className="bg-[#00EEEA] text-black font-bold uppercase py-2 rounded-2xl hover:bg-[#00c9c6] transition-colors active:bg-(--complement)
+          duration-300 ease-in-out w-full">
+          Cotizar precio
+        </button>
 
-      {/* Mostrar el precio total */}
-      <div>
-        <label htmlFor="precio" className="block mb-1 font-semibold">
-          Precio total: Bs.
-        </label>
-        <input
-          type="text"
-          id="precio"
-          name="precio"
-          readOnly
-          className="text-center text-4xl font-medium w-full p-2 border border-(--secundary) rounded-2xl text-white
+        {/* Mostrar el precio total */}
+        <div>
+          <label htmlFor="precio" className="block mb-1 font-semibold">
+            Precio total: Bs.
+          </label>
+          <input
+            type="text"
+            id="precio"
+            name="precio"
+            readOnly
+            className="text-center text-4xl font-medium w-full p-2 border border-(--secundary) rounded-2xl text-white
             focus:outline-none focus:ring-1 focus:ring-(--complement) focus:border-transparent
             hover:bg-[#090A32] transition duration-300 ease-in-out appearance-none"
-          value={`Bs. ${precio}`}
-        />
-      </div>
-    </section>
-  </form>
-);
-
+            value={`Bs. ${precio}`}
+          />
+        </div>
+      </section>
+    </form>
+  );
 }

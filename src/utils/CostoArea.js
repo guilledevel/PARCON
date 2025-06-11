@@ -7,7 +7,7 @@ export function costoArea(alto, ancho, costoBase) {
     const area = (alto * ancho) / 10000; // Área en metros cuadrados
     const precio = costo * area;
 
-    return precio;
+    return {precio, area};
 }
 
 export function redondear(precio) {
