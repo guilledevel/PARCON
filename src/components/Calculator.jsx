@@ -80,22 +80,23 @@ export default function Calculator() {
 
     //  "adhesivo"
     else if (tipo === "adhesivo") {
-      //recuperamos el tamaño  de area
+      //recuperamos el tamaño  de area☑️☑️
       const area = costoArea(altoNum, largoNum);
-      //declaramos la variable de precio
+      //devuelve el precio BASE por tamaño ☑️☑️
+      let base = tablaAdhesivo.find(entry => entry.m2 >= area.area);
+      //declaramos la variable de precio☑️☑️
       let precioBase;
-      //creamos la logica si area es menor a 1
-      if (area.area <= 0.01) {
-        let base = (item.precios.base = tablaAdhesivo[0].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
 
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
+
+      let basePlastificado = (item.precios.plastificado = base.base / 2);
+
+        let costoBase = costoArea(altoNum, largoNum, base.base).precio;
         let costoPlastificado = costoArea(
           altoNum,
           largoNum,
           basePlastificado
         ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
+        let precioInstalacion = area.area * item.precios.instalacion; 
 
         if (opciones["plastificado"] && opciones["instalacion"]) {
           precioBase = costoBase + costoPlastificado + precioInstalacion;
@@ -106,217 +107,7 @@ export default function Calculator() {
         } else {
           precioBase = costoBase;
         }
-      } else if (area.area <= 0.04) {
-        let base = (item.precios.base = tablaAdhesivo[1].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else if (area.area <= 0.09) {
-        let base = (item.precios.base = tablaAdhesivo[2].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else if (area.area <= 0.16) {
-        let base = (item.precios.base = tablaAdhesivo[3].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else if (area.area <= 0.25) {
-        let base = (item.precios.base = tablaAdhesivo[4].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else if (area.area <= 0.36) {
-       let base = (item.precios.base = tablaAdhesivo[5].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else if (area.area <= 0.49) {
-         let base = (item.precios.base = tablaAdhesivo[6].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else if (area.area <= 0.64) {
-         let base = (item.precios.base = tablaAdhesivo[7].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else if (area.area <= 0.81) {
-         let base = (item.precios.base = tablaAdhesivo[8].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else if (area.area <= 1.0) {
-         let base = (item.precios.base = tablaAdhesivo[9].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      } else {
-         let base = (item.precios.base = tablaAdhesivo[9].base);
-        let basePlastificado = (item.precios.plastificado = base / 2);
-
-        let costoBase = costoArea(altoNum, largoNum, base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
-
-        if (opciones["plastificado"] && opciones["instalacion"]) {
-          precioBase = costoBase + costoPlastificado + precioInstalacion;
-        } else if (opciones["plastificado"]) {
-          precioBase = costoBase + costoPlastificado;
-        } else if (opciones["instalacion"]) {
-          precioBase = costoBase + precioInstalacion;
-        } else {
-          precioBase = costoBase;
-        }
-      }
+       
       precioFinal = redondear(precioBase);
     }
 
