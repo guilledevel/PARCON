@@ -2,6 +2,8 @@
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
+const urlBase = 'https://parcon.netlify.app/';
+
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 ---
@@ -11,7 +13,26 @@ import '../styles/global.css';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="icon" type="image/svg+xml" href="/parcon.webp" />
+     <!-- Meta Open Graph para redes sociales -->
+    <meta name="description" content="Publicidad visual de alto impacto: gigantografías, banners, adhesivos y más. ¡Impulsa tu marca con Parcon!" />
+
+  <!-- Open Graph: Facebook, WhatsApp, LinkedIn, etc. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Gigantografias PARCON – Gigantografías e Impresión" />
+  <meta property="og:description" content="Publicidad visual de alto impacto: gigantografías, banners, adhesivos y más. ¡Impulsa tu marca con Parcon!" />
+  <meta property="og:image" content="https://parcon.netlify.app/media.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://parcon.netlify.app" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Parcon Publicidad – Gigantografías e Impresión" />
+  <meta name="twitter:description" content="Publicidad visual de alto impacto: gigantografías, banners, adhesivos y más. ¡Impulsa tu marca con Parcon!" />
+  <meta name="twitter:image" content="https://parcon.netlify.app/media.png" />
+
     <title>PARCON</title>
  
   </head>
