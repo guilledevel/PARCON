@@ -28,11 +28,11 @@ Este es un sitio web moderno diseñado con **Astro** y **React**, enfocado en br
 ## 🚧 Instalación y desarrollo local
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio
+git clone https://github.com/guilledevel/PARCON.git
+cd PARCON
 npm install
 npm run dev
-
+```
 
 ## 🧞 Commands
 

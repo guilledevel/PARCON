@@ -2,17 +2,17 @@
 // filepath: e:\DEV\PARCON\src\components\Cinta.astro
 import icons from '/public/data/icons.json';
 const allItems = [...icons, ...icons]; // duplicar para efecto de loop
-const duration = 30;
+const duration = 50;
 const allIcons = icons.length
 console.log(allIcons);
 ---
 
 
 
- <div class="wrapper bg-gradient-to-r from-purple-500 to-cyan-400">
+ <div class="wrapper bg-gradient-to-r from-purple-500 to-cyan-400 h-7 md:h-14">
 
     {allItems.map((icon, index) => (
-      <div class="item" 
+      <div class="item w-18 md:w-36" 
       
       style={`
       animation-delay: ${(duration / allIcons) * (allIcons - index - 1) * - 1}s
@@ -28,13 +28,12 @@ console.log(allIcons);
 
   .wrapper {
   
-  height: 60px;
+  
   width: 100%;
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
-  margin-top: 108px;
 
   mask-image: linear-gradient(
     to right,
@@ -47,19 +46,14 @@ console.log(allIcons);
 
 .item {
   display: flex;
-  width: 150px;
-  padding: 10px;
-  gap: 15px;
-  height: 40px;
+  gap: 5px;
+ 
 
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  font-size: 18px;
-  border-radius: 8px;
   position: absolute;
-  left: max(calc(130px * 16), 100%);
-  animation: scroll 30s linear infinite;
+  left: max(calc(60px * 16), 100%);
+  animation: scroll 50s linear infinite;
 }
 
    
@@ -69,4 +63,9 @@ console.log(allIcons);
   }
 
 }
+ @media (width >= 48rem){
+  .item{
+    left: max(calc(130px * 16), 100%);
+  }
+ }
 </style>

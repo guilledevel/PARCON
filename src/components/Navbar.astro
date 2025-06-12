@@ -17,7 +17,7 @@ function toggleMenu() {
 }
 ---
 
-<div class="w-screen bg-black flex justify-center items-center">
+<div class="w-screen  bg-(--primary) flex justify-center items-center sticky">
   <nav class="w-[90%] p-4 flex justify-between items-center relative">
     <a href="/" class={logoClass}>Parcon</a>
     
@@ -46,7 +46,12 @@ function toggleMenu() {
     </ul>
 
     <!-- Menú móvil -->
-    <ul id="mobileMenu" class="absolute top-full left-0 w-full bg-black flex-col gap-4 px-4 py-2 md:hidden hidden">
+  
+    <div id="mobileMenu" class="absolute top-full left-0 w-full h-[550px] z-10 bg-(--primary) flex-col  md:hidden hidden">
+
+    
+     
+    <ul class=" flex flex-col gap-4 w-1/2 mx-[auto] mt-6" >
       <li>
         <a href="/" class={linkClass("/")}>Inicio</a>
       </li>
@@ -57,5 +62,7 @@ function toggleMenu() {
         <a href="/cotizar" class={linkClass("/cotizar")}>Cotizar</a>
       </li>
     </ul>
+    </div>
+  
   </nav>
 </div>
