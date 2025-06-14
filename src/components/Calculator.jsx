@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { costoArea, redondear,  } from "../utils/CostoArea.js";
+import { costoArea, redondear } from "../utils/CostoArea.js";
 import price from "../data/price.json";
 
 // Definimos el componente Calculator
@@ -66,7 +66,11 @@ export default function Calculator() {
       let precioBase;
 
       const cantidad = parseInt(opciones["cantidad"]) || 0;
-      const precioUnitario = costoArea(altoNum, largoNum, item.precios.base).precio;
+      const precioUnitario = costoArea(
+        altoNum,
+        largoNum,
+        item.precios.base
+      ).precio;
 
       if (cantidad >= 50) {
         precioBase = precioUnitario * cantidad;
@@ -83,12 +87,15 @@ export default function Calculator() {
       //recuperamos el tamaño  de area☑️☑️
       const area = costoArea(altoNum, largoNum);
       //devuelve el precio BASE por tamaño ☑️☑️
-      let base = tablaAdhesivo.find(entry => entry.m2 >= area.area);
+      let base = tablaAdhesivo.find((entry) => entry.m2 >= area.area);
       //declaramos la variable de precio☑️☑️
       let precioBase;
 
-
-      let basePlastificado = (item.precios.plastificado = base.base / 2);
+      if (area.area <= 0.0081) {
+        precioBase = 15;
+        console.log(precioBase);
+      } else {
+        let basePlastificado = (item.precios.plastificado = base.base / 2);
 
         let costoBase = costoArea(altoNum, largoNum, base.base).precio;
         let costoPlastificado = costoArea(
@@ -96,7 +103,7 @@ export default function Calculator() {
           largoNum,
           basePlastificado
         ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion; 
+        let precioInstalacion = area.area * item.precios.instalacion;
 
         if (opciones["plastificado"] && opciones["instalacion"]) {
           precioBase = costoBase + costoPlastificado + precioInstalacion;
@@ -107,7 +114,8 @@ export default function Calculator() {
         } else {
           precioBase = costoBase;
         }
-       
+      }
+
       precioFinal = redondear(precioBase);
     }
 
@@ -195,7 +203,11 @@ export default function Calculator() {
         largoNum,
         item.precios.plastificado
       ).precio;
-      let precioUnaCara = costoArea(altoNum, largoNum, item.precios.base).precio;
+      let precioUnaCara = costoArea(
+        altoNum,
+        largoNum,
+        item.precios.base
+      ).precio;
 
       let cantidadFocos = parseInt(opciones["focos"]) || 0;
       let precioFocos = cantidadFocos * item.precios.cambio_focos;
@@ -224,7 +236,11 @@ export default function Calculator() {
     else if (tipo === "cambioLona") {
       let precioBase;
 
-      let precioUnaCara = costoArea(altoNum, largoNum, item.precios.base).precio;
+      let precioUnaCara = costoArea(
+        altoNum,
+        largoNum,
+        item.precios.base
+      ).precio;
       let precioPlastificado = costoArea(
         altoNum,
         largoNum,
