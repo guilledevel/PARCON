@@ -1,0 +1,18 @@
+---
+import AdminPanel from '@/components/admin/Admin';
+const isAuthorized = Astro.request.headers.get("cookie")?.includes("adminAuth=true");
+
+{isAuthorized ? <AdminPanel /> : (
+  <form method="POST">
+    <label>Clave:</label>
+    <input type="password" name="password" />
+    <button type="submit">Entrar</button>
+  </form>
+)}
+
+const body = await Astro.request.formData();
+if (body.get("password") === "CLAVE123") {
+  Astro.response.headers.set("Set-Cookie", "adminAuth=true; Path=/admin;");
+  return Astro.redirect("/admin");
+}
+---
