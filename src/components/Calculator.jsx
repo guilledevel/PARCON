@@ -11,18 +11,18 @@ export default function Calculator() {
   const [opciones, setOpciones] = useState({});
 
   //tabla de precios adsivo
-  const tablaAdhesivo = [
-    { m2: 0.01, base: 1500 },
-    { m2: 0.04, base: 725 },
-    { m2: 0.09, base: 478 },
-    { m2: 0.16, base: 356 },
-    { m2: 0.25, base: 284 },
-    { m2: 0.36, base: 233 },
-    { m2: 0.49, base: 200 },
-    { m2: 0.64, base: 175 },
-    { m2: 0.81, base: 156 },
-    { m2: 1.0, base: 140 },
-  ];
+ const tablaAdhesivo = [
+  { m2: 1.0, base: 140 },
+  { m2: 0.81, base: 156 },
+  { m2: 0.64, base: 175 },
+  { m2: 0.49, base: 200 },
+  { m2: 0.36, base: 233 },
+  { m2: 0.25, base: 284 },
+  { m2: 0.16, base: 356 },
+  { m2: 0.09, base: 478 },
+  { m2: 0.04, base: 725 },
+  { m2: 0.01, base: 1500 }
+];
 
   // Cuando cambia el tipo resetea las opciones menos alto y largo
   const handleTipoChange = (e) => {
@@ -34,6 +34,7 @@ export default function Calculator() {
       opcionesIniciales[opt.campo] = false;
     });
     setOpciones(opcionesIniciales);
+    resetPrice();
   };
 
   //maneja el camnbio de cada checkbox
@@ -44,39 +45,60 @@ export default function Calculator() {
     }));
   }
 
+  function resetArea (){
+    setAlto("");
+  setLargo("");
+  }
+  function resetPrice(){
+    setPrecio(0);
+  }
   function calcularPrecio() {
     const altoNum = parseFloat(alto) || 0;
     const largoNum = parseFloat(largo) || 0;
-    // const areaM2 = (altoNum * largoNum) / 10000;
-
+   
     const item = price[tipo];
     let precioFinal = 0;
+    //recuperamos el tamaño  de area ☑️☑️
+    const area = costoArea(altoNum, largoNum).area;
+    console.log(`el area general antes de if ${area} m2`);
 
     // Lógica dinámica según las opciones seleccionadas
     // para "banner"
     if (tipo === "banner") {
-      const costoUnitario = opciones["varilla"]
+      if(area <= 0.36){
+        if (area < 0.1521){
+          // 0.25 50bs 50x50
+          // 0.3 40bs 60x50
+          alert("el tamaño es muy pequeño")
+          resetArea();
+          }else {
+          area >=0.3 ? precioFinal=60 : precioFinal=50;
+          //console.log(precioFinal);
+        }
+      }else {
+        const costoUnitario = opciones["varilla"]
         ? item.precios.varilla
         : item.precios.base;
       const precioBase = costoArea(altoNum, largoNum, costoUnitario);
       precioFinal = redondear(precioBase.precio);
+      }
     }
     // trabajo stikers
     else if (tipo === "sticker") {
       let precioBase;
 
       const cantidad = parseInt(opciones["cantidad"]) || 0;
-      const precioUnitario = costoArea(
-        altoNum,
-        largoNum,
-        item.precios.base
-      ).precio;
+      const precioUnitario = area * item.precios.base
 
-      if (cantidad >= 50) {
-        precioBase = precioUnitario * cantidad;
+      if (cantidad >= 50 && area > 0.0025) {
+      
+          precioBase = precioUnitario * cantidad
+       
       } else {
-        alert("La cantidad mínima para stickers es 50 unidades.");
-        return;
+
+       cantidad >= 50 ? alert("el tamño no puede ser menor a 5x5 cm"): alert("La cantidad mínima para stickers es 50 unidades.");
+       resetPrice();
+       return;
       }
 
       precioFinal = redondear(precioBase);
@@ -84,38 +106,37 @@ export default function Calculator() {
 
     //  "adhesivo"
     else if (tipo === "adhesivo") {
-      //recuperamos el tamaño  de area☑️☑️
-      const area = costoArea(altoNum, largoNum);
-      //devuelve el precio BASE por tamaño ☑️☑️
-      let base = tablaAdhesivo.find((entry) => entry.m2 >= area.area);
+      //devuelve el precio BASE sugun tamaño... llama al array tableAdhesivo ☑️☑️
+      let base = tablaAdhesivo.find((entry) => entry.m2 <= area);
+      //console.log(` precio base antes del if ${base.base}`);
       //declaramos la variable de precio☑️☑️
       let precioBase;
 
-      if (area.area <= 0.0081) {
+      if (area <= 0.0081) {
         precioBase = 15;
-        console.log(precioBase);
       } else {
+        //precio base de plastificado 
         let basePlastificado = (item.precios.plastificado = base.base / 2);
 
-        let costoBase = costoArea(altoNum, largoNum, base.base).precio;
-        let costoPlastificado = costoArea(
-          altoNum,
-          largoNum,
-          basePlastificado
-        ).precio;
-        let precioInstalacion = area.area * item.precios.instalacion;
+        let costoBase = area * base.base;
+        let costoPlastificado = area * basePlastificado
+        let precioInstalacion = area * item.precios.instalacion;
 
+        //if para ver si los imputs son TRUE
         if (opciones["plastificado"] && opciones["instalacion"]) {
+          //console.log("plastificado e instalado");
           precioBase = costoBase + costoPlastificado + precioInstalacion;
         } else if (opciones["plastificado"]) {
+          //console.log("plastificado");
           precioBase = costoBase + costoPlastificado;
         } else if (opciones["instalacion"]) {
           precioBase = costoBase + precioInstalacion;
         } else {
+          //console.log("SOLO ADHESIVO");
           precioBase = costoBase;
+          //console.log(`costo base else ${costoBase}`);
         }
       }
-
       precioFinal = redondear(precioBase);
     }
 
@@ -131,7 +152,15 @@ export default function Calculator() {
         item.precios.plastificado
       ).precio;
       let precioPatas = item.precios.patas || 0;
+      if(area<= 0.25){
+        resetArea();
+        resetPrice();
+        alert("el tamaño es muy pequeño")
+        return;
 
+      }else{
+
+      
       if (
         opciones["dos_caras"] &&
         opciones["plastificado"] &&
@@ -152,7 +181,7 @@ export default function Calculator() {
         precioBase = unaCara + plastificado;
       } else {
         precioBase = unaCara;
-      }
+      }};
 
       precioFinal = redondear(precioBase);
     }
@@ -211,7 +240,21 @@ export default function Calculator() {
 
       let cantidadFocos = parseInt(opciones["focos"]) || 0;
       let precioFocos = cantidadFocos * item.precios.cambio_focos;
+      if (area <0.6){
 
+       if (altoNum < 60) {
+  alert("El alto debe ser mayor o igual a 60 cm");
+  resetPrice();
+  return;
+}
+
+if (largoNum < 60) {
+  alert("El largo debe ser mayor o igual a 60 cm");
+  resetPrice();
+  return;
+}
+
+      }else{
       if (opciones["plastificado"] && opciones["dos_caras"]) {
         let precioDosCarasPlastificado =
           (precioPlastificado + precioUnaCara) * 2;
@@ -228,7 +271,7 @@ export default function Calculator() {
       } else {
         precioBase =
           costoArea(altoNum, largoNum, item.precios.base).precio + precioFocos;
-      }
+      }}
       precioFinal = redondear(precioBase);
     }
 
@@ -287,9 +330,7 @@ export default function Calculator() {
           </legend>
 
           <div>
-            <label htmlFor="tipo" className="block mb-1 font-medium uppercase">
-              Cotiza el tipo de Trabajo:
-            </label>
+            
             <select
               id="tipo"
               name="tipo"
@@ -363,7 +404,7 @@ export default function Calculator() {
                   <input
                     type="number"
                     name={opt.campo}
-                    min="1"
+                    min="50"
                     value={opciones[opt.campo] || ""}
                     onChange={(e) =>
                       setOpciones((prev) => ({
