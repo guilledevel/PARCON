@@ -368,6 +368,7 @@ if (largoNum < 60) {
                 value={alto}
                 onChange={(e) => setAlto(e.target.value)}
                 min="0"
+                step="any"
                 required
               />
               <input
@@ -381,6 +382,7 @@ if (largoNum < 60) {
                 value={largo}
                 onChange={(e) => setLargo(e.target.value)}
                 min="0"
+                step="any"
                 required
               />
             </div>
