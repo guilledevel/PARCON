@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 Parcon
 
 ¡Bienvenido a **Parcon**!  
@@ -34,6 +35,34 @@ npm install
 npm run dev
 ```
 
+=======
+# Parcon
+
+¡Bienvenido a Parcon! 🌐
+
+Este es el sitio web del proyecto Parcon, diseñado con Astro, React y tecnologías modernas de desarrollo web.
+
+🔗 **Visita el sitio en producción:**  
+[https://parcon.netlify.app](https://parcon.netlify.app)
+
+## Tecnologías utilizadas
+
+- Astro
+- React
+- JavaScript / TypeScript
+- Tailwind CSS
+- Netlify (para despliegue)
+
+## Cómo ejecutar el proyecto localmente
+
+```bash
+git clone https://github.com/tu-usuario/tu-repositorio.git
+cd tu-repositorio
+npm install
+npm run dev
+
+
+>>>>>>> develop
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
