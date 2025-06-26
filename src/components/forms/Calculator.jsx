@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { costoArea, redondear } from "../utils/CostoArea.js";
-import price from "../data/price.json";
+import { costoArea, redondear } from "../../utils/CostoArea.js";
+import price from "../../data/price.json";
 
 // Definimos el componente Calculator
 export default function Calculator() {

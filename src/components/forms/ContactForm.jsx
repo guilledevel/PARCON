@@ -1,11 +1,17 @@
 export default function ContactForm() {
   return (
-    <form className="space-y-4 max-w-lg mx-auto" aria-label="Formulario de contacto">
+    <form
+      className="space-y-4 max-w-lg mx-auto"
+      aria-label="Formulario de contacto">
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-700">Contáctanos</legend>
+        <legend className="text-lg font-semibold text-gray-700">
+          Contáctanos
+        </legend>
 
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700">
             Nombre
           </label>
           <input
@@ -19,7 +25,9 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700">
             Correo electrónico
           </label>
           <input
@@ -33,7 +41,9 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium text-gray-700">
             Mensaje
           </label>
           <textarea
@@ -42,14 +52,12 @@ export default function ContactForm() {
             placeholder="Mensaje"
             className="w-full p-2 border rounded"
             rows={4}
-            required
-          ></textarea>
+            required></textarea>
         </div>
 
         <button
           type="submit"
-          className="bg-cyan-500 hover:bg-cyan-700 text-white px-4 py-2 rounded"
-        >
+          className="bg-cyan-500 hover:bg-cyan-700 text-white px-4 py-2 rounded">
           Enviar
         </button>
       </fieldset>

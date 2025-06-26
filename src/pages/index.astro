@@ -1,12 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.jsx';
-import Cinta from '../components/Cinta.astro';
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/sections/Hero.jsx";
+import Map from "@/components/ui/Map.astro";
+import Cinta from "@/components/ui/Cinta.astro";
+import Welcome from "@/components/ui/Welcome.astro";
 ---
 
 <Layout>
-  <section class="w-screen flex flex-col justify-baseline  ">
+  <section class="w-screen flex flex-col justify-baseline">
     <Hero />
-  <Cinta/>
+    <Cinta />
+    <Welcome />
+    <Map />
   </section>
 </Layout>
