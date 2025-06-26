@@ -11,18 +11,18 @@ export default function Calculator() {
   const [opciones, setOpciones] = useState({});
 
   //tabla de precios adsivo
- const tablaAdhesivo = [
-  { m2: 1.0, base: 140 },
-  { m2: 0.81, base: 156 },
-  { m2: 0.64, base: 175 },
-  { m2: 0.49, base: 200 },
-  { m2: 0.36, base: 233 },
-  { m2: 0.25, base: 284 },
-  { m2: 0.16, base: 356 },
-  { m2: 0.09, base: 478 },
-  { m2: 0.04, base: 725 },
-  { m2: 0.01, base: 1500 }
-];
+  const tablaAdhesivo = [
+    { m2: 1.0, base: 140 },
+    { m2: 0.81, base: 156 },
+    { m2: 0.64, base: 175 },
+    { m2: 0.49, base: 200 },
+    { m2: 0.36, base: 233 },
+    { m2: 0.25, base: 284 },
+    { m2: 0.16, base: 356 },
+    { m2: 0.09, base: 478 },
+    { m2: 0.04, base: 725 },
+    { m2: 0.01, base: 1500 },
+  ];
 
   // Cuando cambia el tipo resetea las opciones menos alto y largo
   const handleTipoChange = (e) => {
@@ -45,17 +45,17 @@ export default function Calculator() {
     }));
   }
 
-  function resetArea (){
+  function resetArea() {
     setAlto("");
-  setLargo("");
+    setLargo("");
   }
-  function resetPrice(){
+  function resetPrice() {
     setPrecio(0);
   }
   function calcularPrecio() {
     const altoNum = parseFloat(alto) || 0;
     const largoNum = parseFloat(largo) || 0;
-   
+
     const item = price[tipo];
     let precioFinal = 0;
     //recuperamos el tamaño  de area ☑️☑️
@@ -65,22 +65,22 @@ export default function Calculator() {
     // Lógica dinámica según las opciones seleccionadas
     // para "banner"
     if (tipo === "banner") {
-      if(area <= 0.36){
-        if (area < 0.1521){
+      if (area <= 0.36) {
+        if (area < 0.1521) {
           // 0.25 50bs 50x50
           // 0.3 40bs 60x50
-          alert("el tamaño es muy pequeño")
+          alert("el tamaño es muy pequeño");
           resetArea();
-          }else {
-          area >=0.3 ? precioFinal=60 : precioFinal=50;
+        } else {
+          area >= 0.3 ? (precioFinal = 60) : (precioFinal = 50);
           //console.log(precioFinal);
         }
-      }else {
+      } else {
         const costoUnitario = opciones["varilla"]
-        ? item.precios.varilla
-        : item.precios.base;
-      const precioBase = costoArea(altoNum, largoNum, costoUnitario);
-      precioFinal = redondear(precioBase.precio);
+          ? item.precios.varilla
+          : item.precios.base;
+        const precioBase = costoArea(altoNum, largoNum, costoUnitario);
+        precioFinal = redondear(precioBase.precio);
       }
     }
     // trabajo stikers
@@ -88,17 +88,16 @@ export default function Calculator() {
       let precioBase;
 
       const cantidad = parseInt(opciones["cantidad"]) || 0;
-      const precioUnitario = area * item.precios.base
+      const precioUnitario = area * item.precios.base;
 
       if (cantidad >= 50 && area > 0.0025) {
-      
-          precioBase = precioUnitario * cantidad
-       
+        precioBase = precioUnitario * cantidad;
       } else {
-
-       cantidad >= 50 ? alert("el tamño no puede ser menor a 5x5 cm"): alert("La cantidad mínima para stickers es 50 unidades.");
-       resetPrice();
-       return;
+        cantidad >= 50
+          ? alert("el tamño no puede ser menor a 5x5 cm")
+          : alert("La cantidad mínima para stickers es 50 unidades.");
+        resetPrice();
+        return;
       }
 
       precioFinal = redondear(precioBase);
@@ -115,11 +114,11 @@ export default function Calculator() {
       if (area <= 0.0081) {
         precioBase = 15;
       } else {
-        //precio base de plastificado 
+        //precio base de plastificado
         let basePlastificado = (item.precios.plastificado = base.base / 2);
 
         let costoBase = area * base.base;
-        let costoPlastificado = area * basePlastificado
+        let costoPlastificado = area * basePlastificado;
         let precioInstalacion = area * item.precios.instalacion;
 
         //if para ver si los imputs son TRUE
@@ -152,36 +151,34 @@ export default function Calculator() {
         item.precios.plastificado
       ).precio;
       let precioPatas = item.precios.patas || 0;
-      if(area<= 0.25){
+      if (area <= 0.25) {
         resetArea();
         resetPrice();
-        alert("el tamaño es muy pequeño")
+        alert("el tamaño es muy pequeño");
         return;
-
-      }else{
-
-      
-      if (
-        opciones["dos_caras"] &&
-        opciones["plastificado"] &&
-        opciones["patas"]
-      ) {
-        precioBase = dosCaras + plastificado * 2 + precioPatas;
-      } else if (opciones["plastificado"] && opciones["patas"]) {
-        precioBase = unaCara + plastificado + precioPatas;
-      } else if (opciones["dos_caras"] && opciones["patas"]) {
-        precioBase = dosCaras + precioPatas;
-      } else if (opciones["patas"]) {
-        precioBase = unaCara + precioPatas;
-      } else if (opciones["dos_caras"] && opciones["plastificado"]) {
-        precioBase = dosCaras + plastificado * 2;
-      } else if (opciones["dos_caras"]) {
-        precioBase = dosCaras;
-      } else if (opciones["plastificado"]) {
-        precioBase = unaCara + plastificado;
       } else {
-        precioBase = unaCara;
-      }};
+        if (
+          opciones["dos_caras"] &&
+          opciones["plastificado"] &&
+          opciones["patas"]
+        ) {
+          precioBase = dosCaras + plastificado * 2 + precioPatas;
+        } else if (opciones["plastificado"] && opciones["patas"]) {
+          precioBase = unaCara + plastificado + precioPatas;
+        } else if (opciones["dos_caras"] && opciones["patas"]) {
+          precioBase = dosCaras + precioPatas;
+        } else if (opciones["patas"]) {
+          precioBase = unaCara + precioPatas;
+        } else if (opciones["dos_caras"] && opciones["plastificado"]) {
+          precioBase = dosCaras + plastificado * 2;
+        } else if (opciones["dos_caras"]) {
+          precioBase = dosCaras;
+        } else if (opciones["plastificado"]) {
+          precioBase = unaCara + plastificado;
+        } else {
+          precioBase = unaCara;
+        }
+      }
 
       precioFinal = redondear(precioBase);
     }
@@ -240,38 +237,38 @@ export default function Calculator() {
 
       let cantidadFocos = parseInt(opciones["focos"]) || 0;
       let precioFocos = cantidadFocos * item.precios.cambio_focos;
-      if (area <0.6){
+      if (area < 0.6) {
+        if (altoNum < 60) {
+          alert("El alto debe ser mayor o igual a 60 cm");
+          resetPrice();
+          return;
+        }
 
-       if (altoNum < 60) {
-  alert("El alto debe ser mayor o igual a 60 cm");
-  resetPrice();
-  return;
-}
-
-if (largoNum < 60) {
-  alert("El largo debe ser mayor o igual a 60 cm");
-  resetPrice();
-  return;
-}
-
-      }else{
-      if (opciones["plastificado"] && opciones["dos_caras"]) {
-        let precioDosCarasPlastificado =
-          (precioPlastificado + precioUnaCara) * 2;
-        precioBase = precioDosCarasPlastificado + precioFocos;
-      } else if (opciones["dos_caras"]) {
-        precioBase = precioUnaCara * 2 + precioFocos;
-      } else if (opciones["plastificado"]) {
-        precioBase = precioPlastificado + precioUnaCara + precioFocos;
-      } else if (opciones["plastificado"]) {
-        precioBase =
-          areaM2 * item.precios.cambio_panaflex +
-          precioPlastificado +
-          precioFocos;
+        if (largoNum < 60) {
+          alert("El largo debe ser mayor o igual a 60 cm");
+          resetPrice();
+          return;
+        }
       } else {
-        precioBase =
-          costoArea(altoNum, largoNum, item.precios.base).precio + precioFocos;
-      }}
+        if (opciones["plastificado"] && opciones["dos_caras"]) {
+          let precioDosCarasPlastificado =
+            (precioPlastificado + precioUnaCara) * 2;
+          precioBase = precioDosCarasPlastificado + precioFocos;
+        } else if (opciones["dos_caras"]) {
+          precioBase = precioUnaCara * 2 + precioFocos;
+        } else if (opciones["plastificado"]) {
+          precioBase = precioPlastificado + precioUnaCara + precioFocos;
+        } else if (opciones["plastificado"]) {
+          precioBase =
+            areaM2 * item.precios.cambio_panaflex +
+            precioPlastificado +
+            precioFocos;
+        } else {
+          precioBase =
+            costoArea(altoNum, largoNum, item.precios.base).precio +
+            precioFocos;
+        }
+      }
       precioFinal = redondear(precioBase);
     }
 
@@ -330,7 +327,6 @@ if (largoNum < 60) {
           </legend>
 
           <div>
-            
             <select
               id="tipo"
               name="tipo"
