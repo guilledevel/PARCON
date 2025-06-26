@@ -1,0 +1,249 @@
+---
+// Componente Astro extendido: MainGigantografias.astro
+const productos = [
+  {
+    nombre: "Banner",
+    precio: 120,
+    img: "/images/banner.jpg"
+  },
+  {
+    nombre: "Sticker",
+    precio: 150,
+    img: "/images/sticker.jpg"
+  },
+  {
+    nombre: "Adhesivo",
+    precio: 140,
+    img: "/images/adhesivo.jpg"
+  },
+  {
+    nombre: "Bastidor",
+    precio: 180,
+    img: "/images/bastidor.jpg"
+  },
+  {
+    nombre: "Luminoso",
+    precio: 530,
+    img: "/images/luminoso.jpg"
+  },
+  {
+    nombre: "Refacción de letreros",
+    precio: 190,
+    img: "/images/panaflex.jpg"
+  }
+];
+
+---
+
+<main class="max-w-7xl mx-auto p-6 font-sans text-p-800">
+  <!-- Secciones previas (introduccion, servicios, proyectos, tecnologia, contacto) ... -->
+
+  <!-- welcome -->
+  <section id="introduccion" class=" bg-(--primary) rounded-lg shadow-md mb-10 flex flex-col md:flex-row items-center gap-6 p-6">
+    <img 
+  src="/sucursal.png" 
+  alt="Sucursal de la agencia de gigantografías" 
+  class="rounded-lg object-cover w-full md:w-96 flex-shrink-0 shadow-xl"
+/>
+    <div class="flex-1">
+      <h2 class="text-3xl font-semibold text-(--secundary) mb-4">Bienvenido a Nuestra Agencia de Gigantografías</h2>
+      <p class="mb-2">Transformamos tus ideas en impresionantes piezas visuales de gran formato que capturan la atención y destacan tu marca.</p>
+      <p>Con tecnología avanzada y materiales de alta calidad, garantizamos resultados duraderos y vibrantes.</p>
+    </div>
+  </section>
+<!-- services -->
+  <section id="servicios" class="bg-(--primary) rounded-lg shadow-md mb-10 flex flex-col md:flex-row items-center gap-6 p-6">
+    <img 
+      src="https://www.envaser.com/wp-content/uploads/2020/07/servicios_personalizados.jpg" 
+      alt="Proceso de impresión de gigantografía" 
+      class="rounded-lg object-cover w-full md:w-96 flex-shrink-0"
+    />
+    <div class="flex-1">
+      <h2 class="text-3xl font-semibold text-(--complement) mb-4">Servicios Personalizados</h2>
+      <p class="mb-2">Ofrecemos impresión en vinilo, lonas, telas y materiales especiales para interiores y exteriores.</p>
+      <p>Desde anuncios publicitarios hasta decoraciones urbanas, adaptamos el producto a tus necesidades específicas.</p>
+    </div>
+  </section>
+
+
+  <!-- ejemplo -->
+<div class="relative group w-64 h-40 overflow-hidden rounded-xl shadow-xl">
+  <!-- Imagen base -->
+  <img src="/images/banner.jpg" alt="Banner" class="w-full h-full object-cover" />
+
+  <!-- Fondo animado que se expande -->
+  <div class="absolute inset-0 flex items-center justify-center z-10">
+    <div class="scale-0 group-hover:scale-125 transition-transform duration-500 ease-out rounded-full w-80 h-80 bg-[var(--secundary)] opacity-40 blur-xl"></div>
+  </div>
+
+  <!-- Contenido que aparece encima -->
+  <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 text-white">
+    <h3 class="text-xl font-bold text-[var(--complement)]">Banner</h3>
+    <p class="text-sm">Desde Bs 120</p>
+  </div>
+</div>
+
+
+
+
+
+  
+<!-- projets -->
+<section id="proyectos" class="bg-[var(--primary)] text-white px-6 py-16 rounded-2xl shadow-xl">
+  <h2 class="text-4xl font-bold text-[var(--secundary)] text-center mb-12">Proyectos Destacados</h2>
+  
+  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[200px]">
+    {productos.map((producto, i) => (
+      <div
+        class={`relative group rounded-xl overflow-hidden shadow-lg ${
+          i % 5 === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'
+        }`}
+      >
+        {/* Imagen desenfocada en hover */}
+        <img 
+          src={producto.img} 
+          alt={producto.nombre} 
+          class="w-full h-full object-cover transition duration-500 group-hover:blur-sm group-hover:scale-105"
+        />
+
+        {/* Fondo expansivo */}
+        <div class="absolute inset-0 flex items-center justify-center z-10">
+          <div class="scale-0 group-hover:scale-125 transition-transform duration-700 ease-out rounded-full w-72 h-72 bg-[var(--secundary)] opacity-70 blur-2xl"></div>
+        </div>
+
+        {/* Contenido centrado */}
+        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center text-center px-4">
+          <div>
+            <h3 class="text-2xl font-bold text-[var(--complement)] mb-2">{producto.nombre}</h3>
+            <p class="text-lg text-white">Desde Bs {producto.precio}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+
+
+
+
+
+
+<!-- tecnology -->
+  <section id="tecnologia" class="bg-(--primary) rounded-lg shadow-md mb-10 flex flex-col md:flex-row items-center gap-6 p-6">
+    <img 
+      src="https://www.zintilon.com/wp-content/uploads/2023/11/Fiber-laser-cutting-metal-1.png" 
+      alt="Impresora digital industrial" 
+      class="rounded-lg object-cover w-full md:w-96 flex-shrink-0"
+    />
+    <div class="flex-1">
+      <h2 class="text-3xl font-semibold text-(--complement) mb-4">Tecnología de Punta</h2>
+      <p class="mb-2">Nuestras impresoras digitales de última generación permiten colores vivos y acabados de alta resolución.</p>
+      <p>Utilizamos tintas ecológicas y materiales resistentes para asegurar la durabilidad y sostenibilidad.</p>
+    </div>
+  </section>
+<!-- contacts -->
+  <section id="contacto" class="bg-(--primary) rounded-lg shadow-md mb-10 flex flex-col md:flex-row items-center gap-6 p-6">
+    <img 
+      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" 
+      alt="Atención al cliente agencia de gigantografías" 
+      class="rounded-lg object-cover w-full md:w-96 flex-shrink-0"
+    />
+    <div class="flex-1">
+      <h2 class="text-3xl font-semibold text-(--secundary) mb-4">Contáctanos</h2>
+      <p class="mb-2">Estamos listos para ayudarte a llevar tu mensaje a lo grande con soluciones personalizadas y atención dedicada.</p>
+      <p>Solicita una cotización o agenda una asesoría con nuestros expertos.</p>
+    </div>
+  </section>
+  
+
+
+
+  <!-- Nueva sección: Galería de trabajos -->
+  <section id="galeria" class="bg-(--primary) rounded-lg shadow-md mb-10 p-6">
+    <h2 class="text-3xl font-semibold text-(--complement) mb-6 text-center">Galería de Trabajos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <img 
+        src="https://mlul0iiyqvmi.i.optimole.com/w:auto/h:auto/q:mauto/ig:avif/https://julieta.cl/wp-content/uploads/2024/05/letrero-bastidor.jpg" 
+        alt="Gigantografía trabajo 1" 
+        class="rounded-lg object-cover w-full h-48"
+      />
+      <img 
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2dMFek6_QH2s236S0MK5IJqdFM1yRkrmiZA&s" 
+        alt="Gigantografía trabajo 2" 
+        class="rounded-lg object-cover w-full h-48"
+      />
+      <img 
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP6sgaNsTzhti-r-dZQeNKHsoA7pvPVksqPA&s" 
+        alt="Gigantografía trabajo 3" 
+        class="rounded-lg object-cover w-full h-48"
+      />
+      <img 
+        src="https://dbhg6mekyuoi1.cloudfront.net/images/upload/78188/card/6666164e291130.56174675.jpg" 
+        alt="Gigantografía trabajo 4" 
+        class="rounded-lg object-cover w-full h-48"
+      />
+      <img 
+        src="https://avisosniche.wordpress.com/wp-content/uploads/2015/01/letreros-luminosos-cajas-de-luz-letreros-bastidor-metalico-18362-mlc20153001956_082014-f.jpg" 
+        alt="Gigantografía trabajo 5" 
+        class="rounded-lg object-cover w-full h-48"
+      />
+      <img 
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQukC2WvG1CAQWJFf2deHLmZs98V_To5t9lQQ&s" 
+        alt="Gigantografía trabajo 6" 
+        class="rounded-lg object-cover w-full h-48"
+      />
+    </div>
+  </section>
+
+
+
+
+  <!-- Nueva sección: Redes sociales -->
+  <section id="redes" class="bg-(--primary) rounded-lg shadow-md mb-10 p-6 text-center">
+    <h2 class="text-3xl font-semibold text-(--secundary) mb-6">Síguenos en Redes Sociales</h2>
+    <div class="flex justify-center gap-12 text-blue-600 text-4xl">
+      <!-- WhatsApp -->
+      <a href="https://wa.me/1234567890" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-green-500 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-10 h-10">
+          <path d="M20.52 3.48a11.92 11.92 0 00-17 0 11.91 11.91 0 00-3.5 8.49c0 2.1.54 4.15 1.56 5.93L2 22l4.18-1.09a11.91 11.91 0 005.87 1.56c6.61 0 11.99-5.38 11.99-12 0-3.2-1.27-6.2-3.52-8.9zm-6.98 14.54a7.53 7.53 0 01-4.1-1.12l-.3-.18-2.49.64.67-2.42-.2-.31a7.42 7.42 0 01-1.13-4.11 7.52 7.52 0 0113-5.23 7.51 7.51 0 01-5.65 13.6z"/>
+          <path d="M16.15 13.46c-.27-.14-1.6-.78-1.85-.87s-.42-.13-.6.14-.7.87-.86 1.05-.32.21-.59.07a7.5 7.5 0 01-2.21-1.36 8.36 8.36 0 01-1.55-1.92c-.16-.27 0-.41.12-.55.12-.12.27-.31.41-.46a1.42 1.42 0 00.2-.34.25.25 0 00-.01-.35c-.07-.14-.6-1.44-.82-1.96s-.43-.45-.6-.46h-.51a.76.76 0 00-.55.26c-.19.27-.73.71-.73 1.74s.75 2.02.85 2.17c.11.14 1.47 2.25 3.56 3.15a12.34 12.34 0 001.65.69c.7.22 1.35.19 1.85.11a4.21 4.21 0 001.28-.52 3.42 3.42 0 001.24-1.53 3.4 3.4 0 00-.39-1.2c-.18-.27-.68-.43-.95-.57z"/>
+        </svg>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@tu_agencia" target="_blank" rel="noopener" aria-label="TikTok" class="hover:text-pink-600 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-10 h-10">
+          <path d="M12.5 2.01v7.49a3.5 3.5 0 11-3.5-3.5v.01h-2v6a5 5 0 105 5v-11h.99z"/>
+        </svg>
+      </a>
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/tuagencia" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-blue-800 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-10 h-10">
+          <path d="M22 12a10 10 0 10-11.5 9.87v-7h-2v-3h2v-2c0-2 1.2-3 3-3 .87 0 1.8.15 1.8.15v2h-1c-1 0-1.3.6-1.3 1.2v1.5h2.2l-.35 3h-1.85v7A10 10 0 0022 12z"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+
+    <!-- Nueva sección: Mapa -->
+ <section id="ubicacion" class="bg-(--primary) rounded-lg shadow-md mb-10 p-6">
+  <h2 class="text-3xl font-semibold text-(--complement) mb-6 text-center">Nuestra Ubicación</h2>
+  <div class="w-full aspect-w-16 aspect-h rounded-lg overflow-hidden shadow-lg">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d380.03018384879897!2d-65.24482432124596!3d-16.99507628206706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e44f00162f9983%3A0xfeec062cfe2490e7!2sGIGANTOGRAFIAS%20PARCON!5e0!3m2!1ses!2sbo!4v1686475740349!5m2!1ses!2sbo"
+      width="100%"
+      height="950"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Ubicación Gigantografías Parcon, Shinahota, Cochabamba"
+      class="border-0 w-full h-full"
+    ></iframe>
+  </div>
+</section>
+
+</main>
