@@ -400,6 +400,7 @@ if (largoNum < 60) {
                 value={alto}
                 onChange={(e) => setAlto(e.target.value)}
                 min="0"
+                step="any"
                 required
               />
               <input
@@ -413,6 +414,7 @@ if (largoNum < 60) {
                 value={largo}
                 onChange={(e) => setLargo(e.target.value)}
                 min="0"
+                step="any"
                 required
               />
             </div>
@@ -436,7 +438,7 @@ if (largoNum < 60) {
                   <input
                     type="number"
                     name={opt.campo}
-                    min="50"
+                    min="1"
                     value={opciones[opt.campo] || ""}
                     onChange={(e) =>
                       setOpciones((prev) => ({
