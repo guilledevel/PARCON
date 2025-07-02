@@ -406,7 +406,7 @@ if (largoNum < 60) {
                   <input
                     type="number"
                     name={opt.campo}
-                    min="50"
+                    min="1"
                     value={opciones[opt.campo] || ""}
                     onChange={(e) =>
                       setOpciones((prev) => ({

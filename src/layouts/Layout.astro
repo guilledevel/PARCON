@@ -37,10 +37,10 @@ import '../styles/global.css';
  
   </head>
 
-  <body class="bg-[#0A0A23] text-white min-h-screen flex flex-col items-center">
+  <body class="text-white">
     <Navbar />
 
-    <main class="w-screen flex-grow flex flex-col items-center  ">
+    <main class="  ">
     <ClientRouter transition:name='slide'/>
       <slot />
 
@@ -50,3 +50,14 @@ import '../styles/global.css';
   </body>
 </html>
 
+<style>
+  body {
+    width: 100%;
+    background-color: #0A0A23;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100dvh;
+    justify-items: center;
+    align-items: center;
+  }
+</style>
