@@ -88,15 +88,11 @@ export default function Calculator() {
       let precioBase;
 
       const cantidad = parseInt(opciones["cantidad"]) || 0;
-<<<<<<< HEAD
       const precioUnitario = costoArea(
         altoNum,
         largoNum,
         item.precios.base
       ).precio;
-=======
-      const precioUnitario = area * item.precios.base
->>>>>>> develop
 
       if (cantidad >= 50 && area > 0.0025) {
       
@@ -114,7 +110,6 @@ export default function Calculator() {
 
     //  "adhesivo"
     else if (tipo === "adhesivo") {
-<<<<<<< HEAD
       //recuperamos el tamaño  de area☑️☑️
       const area = costoArea(altoNum, largoNum);
       //devuelve el precio BASE por tamaño ☑️☑️
@@ -135,23 +130,6 @@ export default function Calculator() {
           basePlastificado
         ).precio;
         let precioInstalacion = area.area * item.precios.instalacion;
-=======
-      //devuelve el precio BASE sugun tamaño... llama al array tableAdhesivo ☑️☑️
-      let base = tablaAdhesivo.find((entry) => entry.m2 <= area);
-      //console.log(` precio base antes del if ${base.base}`);
-      //declaramos la variable de precio☑️☑️
-      let precioBase;
-
-      if (area <= 0.0081) {
-        precioBase = 15;
-      } else {
-        //precio base de plastificado 
-        let basePlastificado = (item.precios.plastificado = base.base / 2);
-
-        let costoBase = area * base.base;
-        let costoPlastificado = area * basePlastificado
-        let precioInstalacion = area * item.precios.instalacion;
->>>>>>> develop
 
         //if para ver si los imputs son TRUE
         if (opciones["plastificado"] && opciones["instalacion"]) {
