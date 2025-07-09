@@ -1,5 +1,5 @@
-import ButtonCotizar from "../ui/ButtonCotizar";
-import logo from "@/assets/logo.webp";
+import ButtonCotizar from "@ui/ButtonCotizar";
+import logo from "@assets/logo.webp";
 
 export default function Hero() {
   return (

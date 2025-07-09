@@ -1,0 +1,32 @@
+---
+// src/pages/productos.astro
+import CardProducto from "@ui/CardProducto.astro";
+import orders from "@data/productos.json";
+
+// Aplanamos todos los productos de todas las órdenes
+const productos = orders.flatMap((order) => order.products).slice(0, 50);
+---
+
+  <section class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-6 mt-12">Productos del JSON</h1>
+
+    <p>hols mundo de productos</p>
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {
+        productos.map((producto) => {
+          const { id, title, thumbnail, price, quantity } = producto;
+          return (
+            <CardProducto
+              key={id}
+              nombre={title}
+              imagen={thumbnail}
+              precio={`$${price.toFixed(2)}`}
+              quantity={quantity || "*999"}
+            />
+          );
+        })
+      }
+    </div>
+  </section>
+

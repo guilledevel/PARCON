@@ -1,15 +1,19 @@
 ---
 // filepath: src/components/Navbar.astro
 import logo from "../assets/logo.webp";
+import nav from "@data/nav.json";
+
 const { pathname } = Astro.url;
-const linkClass = (href:string) =>
+
+const linkClass = (href: string) =>
   pathname === href
-    ? "text-(--secundary) font-bold hover:text-(--complement)  transition duration-300 ease-in-out "
-    : "text-white hover:text-cyan-300 active:text-cyan-500  transition duration-300 ease-in-out ";
+    ? "text-(--secundary) font-bold hover:text-(--complement) transition duration-300 ease-in-out"
+    : "text-white hover:text-cyan-300 active:text-cyan-500 transition duration-300 ease-in-out";
+
 const logoClass =
   pathname === "/"
-    ? "text-cyan-400 font-bold text-2xl  transition duration-300 ease-in-out "
-    : "text-white hover:text-cyan-300 active:text-cyan-500 font-bold text-2xl  transition duration-300 ease-in-out ";
+    ? "text-cyan-400 font-bold text-2xl transition duration-300 ease-in-out"
+    : "text-white hover:text-cyan-300 active:text-cyan-500 font-bold text-2xl transition duration-300 ease-in-out";
 
 let isOpen = false;
 function toggleMenu() {
@@ -17,10 +21,10 @@ function toggleMenu() {
 }
 ---
 
-<div class="w-screen  bg-(--primary) flex justify-center items-center sticky top-0">
+<div class="w-screen bg-(--primary) flex justify-center items-center sticky top-0">
   <nav class="w-[90%] p-4 flex justify-between items-center relative">
     <a href="/" class={logoClass}>Parcon</a>
-    
+
     <!-- Botón hamburguesa -->
     <button 
       class="md:hidden text-white focus:outline-none"
@@ -32,37 +36,24 @@ function toggleMenu() {
       </svg>
     </button>
 
-    <!-- Menú navegación -->
+    <!-- Menú navegación desktop -->
     <ul class="hidden md:flex gap-6">
-      <li>
-        <a href="/" class={linkClass("/")}>Inicio</a>
-      </li>
-      <li>
-        <a href="/contacto" class={linkClass("/contacto")}>Contacto</a>
-      </li>
-      <li>
-        <a href="/cotizar" class={linkClass("/cotizar")}>Cotizar</a>
-      </li>
+      {nav.map(({ nombre, href }) => (
+        <li>
+          <a href={href} class={linkClass(href)}>{nombre}</a>
+        </li>
+      ))}
     </ul>
 
     <!-- Menú móvil -->
-  
-    <div id="mobileMenu" class="absolute top-full left-0 w-full h-[550px] z-10 bg-(--primary) flex-col  md:hidden hidden">
-
-    
-     
-    <ul class=" flex flex-col gap-4 w-1/2 mx-[auto] mt-6" >
-      <li>
-        <a href="/" class={linkClass("/")}>Inicio</a>
-      </li>
-      <li>
-        <a href="/contacto" class={linkClass("/contacto")}>Contacto</a>
-      </li>
-      <li>
-        <a href="/cotizar" class={linkClass("/cotizar")}>Cotizar</a>
-      </li>
-    </ul>
+    <div id="mobileMenu" class="absolute top-full left-0 w-full h-[550px] z-10 bg-(--primary) flex-col md:hidden hidden">
+      <ul class="flex flex-col gap-4 w-1/2 mx-auto mt-6">
+        {nav.map(({ nombre, href }) => (
+          <li>
+            <a href={href} class={linkClass(href)}>{nombre}</a>
+          </li>
+        ))}
+      </ul>
     </div>
-  
   </nav>
 </div>

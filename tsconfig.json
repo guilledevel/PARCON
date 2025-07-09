@@ -14,32 +14,22 @@
   ],
 
   "compilerOptions": {
-    "baseUrl": ".", // Base para las rutas relativas
-
-    // Alias de rutas para importaciones más limpias
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@/components": [
-        "src/components/*"
-      ],
-      "@/hooks": [
-        "src/hooks/*"
-      ],
-      "@/icons": [
-        "src/icons/*"
-      ],
-      "@/lib": [
-        "src/lib/*"
-      ],
-      "@/services": [
-        "src/services/*"
-      ]
+      "@components/react/*": ["src/components/react/*"],
+      "@components/layout/*": ["src/components/layout/*"],
+      "@components/pages/*": ["src/components/pages/*"],
+      "@ui/*": ["src/components/ui/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"],
+      "@styles/*": ["src/styles/*"],
+      "@data/*": ["src/data/*"],
+      "@react/*": ["src/react/*"],
+      "@sections/*": ["src/components/sections/*"],
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"]
     },
-
-    // Configuración para soportar JSX con React
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   }
 }
