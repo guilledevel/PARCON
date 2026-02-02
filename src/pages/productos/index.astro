@@ -1,0 +1,16 @@
+---
+import LayoutProducts from "@layouts/LayoutProducts.astro";
+import CardProduct from "@components/ui/CardProduct.astro";
+
+import data from "@data/productos.json";
+const allProducts = Object.values(data.categorias).flat();
+---
+
+<LayoutProducts>
+  <!-- seccion de productos -->
+  <section
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-6 container">
+    {allProducts.map((item) => <CardProduct item={item} />)}
+  </section>
+</LayoutProducts>
+<style></style>

@@ -1,0 +1,34 @@
+---
+import LayoutProducts from "@layouts/LayoutProducts.astro";
+import CardProduct from "@components/ui/CardProduct.astro";
+
+import data from "@data/productos.json";
+
+type Producto = {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  tamaño: string;
+  precio: number;
+  imagen: string;
+  categoria: string;
+  material: string;
+};
+
+export async function getStaticPaths() {
+  return Object.entries(data.categorias).map(([slug, productos]) => ({
+    params: { categoria: slug },
+    props: { productos, slug },
+  }));
+}
+const { productos, slug } = Astro.props as {
+  productos: Producto[];
+  slug: string;
+};
+---
+
+<LayoutProducts>
+  <section class="flex gap-6 justify-center items-center flex-wrap container">
+    {productos.map((item) => <CardProduct item={item} />)}
+  </section>
+</LayoutProducts>

@@ -1,0 +1,104 @@
+---
+const { item } = Astro.props;
+const { id, titulo, descripcion, tamaño, precio, imagen, categoria, material } =
+  item;
+
+const imagenURL =
+  "https://i.pinimg.com/236x/d8/41/18/d84118a58356cf099391ba9d25e31269.jpg";
+---
+
+<article
+  class="group flex relative overflow-hidden rounded-xl border border-slate-700 bg-slate-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+  <!-- Contenedor de imagen con precio en hover -->
+  <div class="relative aspect-square overflow-hidden bg-slate-900">
+    <!-- Imagen -->
+    <img
+      src={imagenURL}
+      alt="Bastidor Aluminio Profesional"
+      class="size-full object-cover transition-transform duration-500 group-hover:scale-110"
+      loading="lazy"
+      width="300"
+      height="300"
+    />
+
+    <!-- Precio - Solo visible en hover -->
+    <div
+      class="absolute inset-0 flex items-center justify-center bg-slate-900/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <span
+        class="rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 text-xl font-bold text-white shadow-2xl transform scale-95 group-hover:scale-100 transition-transform duration-300">
+        {precio} Bs.
+      </span>
+    </div>
+
+    <!-- Efecto overlay sutil -->
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="p-4">
+    <!-- Categoría -->
+    <div class="mb-3">
+      <span
+        class="inline-block rounded-full bg-gradient-to-r from-cyan-900 to-blue-900 px-3 py-1 text-xs font-medium text-cyan-100 border border-cyan-700/30 uppercase">
+        {categoria}
+      </span>
+    </div>
+
+    <!-- Título -->
+    <h3
+      class="mb-2 font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">
+      {titulo}
+    </h3>
+
+    <!-- Descripción -->
+    <p class="mb-4 text-sm text-slate-300 line-clamp-2">
+      {descripcion}
+    </p>
+
+    <!-- Especificaciones -->
+    <div class="mb-5 space-y-2">
+      <div class="flex items-center text-sm text-slate-300">
+        <svg
+          class="mr-2 size-4 text-cyan-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"
+          ></path>
+        </svg>
+        <span class="font-medium"
+          >Tamaño: <span class="text-slate-100">{tamaño} </span></span
+        >
+      </div>
+      <div class="flex items-center text-sm text-slate-300">
+        <svg
+          class="mr-2 size-4 text-cyan-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+          ></path>
+        </svg>
+        <span class="font-medium"
+          >Material: <span class="text-slate-100">{material}</span></span
+        >
+      </div>
+    </div>
+
+    <!-- Botón de acción -->
+    <!--  <button
+      class="w-full rounded-lg bg-gradient-to-r from-cyan-600 to-blue-700 py-3 text-sm font-semibold text-white transition-all hover:from-cyan-700 hover:to-blue-800 active:scale-95 shadow-md hover:shadow-lg">
+      Solicitar Cotización
+    </button> -->
+  </div>
+</article>

@@ -5,7 +5,7 @@
   // Archivos y patrones a incluir en la comprobación de tipos
   "include": [
     ".astro/types.d.ts", // Tipos generados por Astro
-    "**/*"               // Todos los archivos del proyecto
+    "**/*" // Todos los archivos del proyecto
   ],
 
   // Archivos y carpetas a excluir de la comprobación de tipos
@@ -14,28 +14,15 @@
   ],
 
   "compilerOptions": {
-    "baseUrl": ".", // Base para las rutas relativas
-
-    // Alias de rutas para importaciones más limpias
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@/components": [
-        "src/components/*"
-      ],
-      "@/hooks": [
-        "src/hooks/*"
-      ],
-      "@/icons": [
-        "src/icons/*"
-      ],
-      "@/lib": [
-        "src/lib/*"
-      ],
-      "@/services": [
-        "src/services/*"
-      ]
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@icons/*": ["src/icons/*"],
+      "@lib/*": ["src/lib/*"],
+      "@services/*": ["src/services/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@data/*": ["src/data/*"]
     },
 
     // Configuración para soportar JSX con React
