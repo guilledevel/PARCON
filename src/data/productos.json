@@ -1,0 +1,211 @@
+{
+  "tienda": "PARCON",
+  "categorias": {
+    "bastidores": [
+      {
+        "id": "BT001",
+        "titulo": "Bastidor Aluminio",
+        "descripcion": "Estructura de aluminio para displays publicitarios",
+        "tamaño": "100 cm x 300 cm",
+        "precio": 420,
+        "imagen": "https://ejemplo.com/img/bastidor-aluminio.jpg",
+        "categoria": "Bastidores",
+        "material": "Aluminio"
+      },
+      {
+        "id": "BT002",
+        "titulo": "Bastidor Compacto",
+        "descripcion": "Bastidor ligero para tiendas",
+        "tamaño": "100 cm x 200 cm",
+        "precio": 320,
+        "imagen": "https://ejemplo.com/img/bastidor-compacto.jpg",
+        "categoria": "Bastidores",
+        "material": "Aluminio y plástico"
+      },
+      {
+        "id": "BT003",
+        "titulo": "Bastidor Doble Cara",
+        "descripcion": "Estructura reforzada para exterior",
+        "tamaño": "150 cm x 250 cm",
+        "precio": 580,
+        "imagen": "https://ejemplo.com/img/bastidor-doble.jpg",
+        "categoria": "Bastidores",
+        "material": "Acero galvanizado"
+      }
+    ],
+    "letreros": [
+      {
+        "id": "LT001",
+        "titulo": "Letrero en Acero",
+        "descripcion": "Letrero corporativo en acero inoxidable",
+        "tamaño": "40 cm x 100 cm",
+        "precio": 420,
+        "imagen": "https://ejemplo.com/img/letrero-acero.jpg",
+        "categoria": "Letreros",
+        "material": "Acero inoxidable"
+      },
+      {
+        "id": "LT002",
+        "titulo": "Letrero Luminoso LED",
+        "descripcion": "Letrero con iluminación LED comercial",
+        "tamaño": "70 cm x 150 cm",
+        "precio": 480,
+        "imagen": "https://ejemplo.com/img/letrero-led.jpg",
+        "categoria": "Letreros",
+        "material": "Acrílico y componentes LED"
+      },
+      {
+        "id": "LT003",
+        "titulo": "Letrero en MDF",
+        "descripcion": "Letrero artesanal con relieves",
+        "tamaño": "60 cm x 90 cm",
+        "precio": 350,
+        "imagen": "https://ejemplo.com/img/letrero-mdf.jpg",
+        "categoria": "Letreros",
+        "material": "MDF (fibra de densidad media)"
+      }
+    ],
+    "luminosos": [
+      {
+        "id": "LM001",
+        "titulo": "Tótem Luminoso",
+        "descripcion": "Display luminoso autoportante",
+        "tamaño": "50 cm x 180 cm",
+        "precio": 680,
+        "imagen": "https://ejemplo.com/img/totem-luminoso.jpg",
+        "categoria": "Luminosos",
+        "material": "Acrílico y aluminio"
+      },
+      {
+        "id": "LM002",
+        "titulo": "Letra Corpórea 3D",
+        "descripcion": "Letras tridimensionales iluminadas",
+        "tamaño": "30 cm altura",
+        "precio": 280,
+        "imagen": "https://ejemplo.com/img/letra-3d.jpg",
+        "categoria": "Luminosos",
+        "material": "Acrílico y luces LED"
+      }
+    ],
+    "esquineros": [
+      {
+        "id": "EQ001",
+        "titulo": "Esquinero Doble Vista",
+        "descripcion": "Display para esquinas con doble visibilidad",
+        "tamaño": "80 cm x 200 cm x 80 cm",
+        "precio": 190,
+        "imagen": "https://ejemplo.com/img/esquinero-doble.jpg",
+        "categoria": "Esquineros",
+        "material": "PVC y metal"
+      },
+      {
+        "id": "EQ002",
+        "titulo": "Esquinero Metálico",
+        "descripcion": "Estructura metálica para exterior",
+        "tamaño": "60 cm x 150 cm",
+        "precio": 350,
+        "imagen": "https://ejemplo.com/img/esquinero-metalico.jpg",
+        "categoria": "Esquineros",
+        "material": "Acero"
+      }
+    ],
+    "tarjetas": [
+      {
+        "id": "TJ001",
+        "titulo": "Tarjetas Brillantes",
+        "descripcion": "Tarjetas personales con acabado brillante",
+        "tamaño": "8.5 cm x 5.5 cm",
+        "precio": 220,
+        "imagen": "https://ejemplo.com/img/tarjetas-brillo.jpg",
+        "categoria": "Tarjetas",
+        "material": "Papel couché brillante"
+      },
+      {
+        "id": "TJ002",
+        "titulo": "Tarjetas Mate",
+        "descripcion": "Tarjetas con acabado mate elegante",
+        "tamaño": "9 cm x 5.5 cm",
+        "precio": 280,
+        "imagen": "https://ejemplo.com/img/tarjetas-mate.jpg",
+        "categoria": "Tarjetas",
+        "material": "Papel couché mate"
+      },
+      {
+        "id": "TJ003",
+        "titulo": "Tarjetas Premium",
+        "descripcion": "Tarjetas de lujo con sectorización",
+        "tamaño": "8.5 cm x 5.5 cm",
+        "precio": 320,
+        "imagen": "https://ejemplo.com/img/tarjetas-premium.jpg",
+        "categoria": "Tarjetas",
+        "material": "Cartulina premium con acabados especiales"
+      }
+    ],
+    "talonarios": [
+      {
+        "id": "TL001",
+        "titulo": "Talonarios de Factura",
+        "descripcion": "Talonarios con papel continuo",
+        "tamaño": "21 cm x 9.5 cm",
+        "precio": 180,
+        "imagen": "https://ejemplo.com/img/talonario-factura.jpg",
+        "categoria": "Talonarios",
+        "material": "Papel continuo autocopiante"
+      },
+      {
+        "id": "TL002",
+        "titulo": "Talonarios de Recibos",
+        "descripcion": "Talonarios autocopiantes manuales",
+        "tamaño": "14 cm x 21 cm",
+        "precio": 250,
+        "imagen": "https://ejemplo.com/img/talonario-recibos.jpg",
+        "categoria": "Talonarios",
+        "material": "Papel autocopiante"
+      }
+    ],
+    "banners": [
+      {
+        "id": "BN001",
+        "titulo": "Banner de Vinilo",
+        "descripcion": "Banner resistente para exterior",
+        "tamaño": "100 cm x 300 cm",
+        "precio": 320,
+        "imagen": "https://ejemplo.com/img/banner-vinilo.jpg",
+        "categoria": "Banners",
+        "material": "Vinilo de alta resistencia"
+      },
+      {
+        "id": "BN002",
+        "titulo": "Banner de Lona",
+        "descripcion": "Banner profesional de gran formato",
+        "tamaño": "200 cm x 400 cm",
+        "precio": 650,
+        "imagen": "https://ejemplo.com/img/banner-lona.jpg",
+        "categoria": "Banners",
+        "material": "Lona frontlit"
+      }
+    ],
+    "stickers": [
+      {
+        "id": "ST001",
+        "titulo": "Stickers de Vinilo",
+        "descripcion": "Stickers para vidrios y vehículos",
+        "tamaño": "Personalizado",
+        "precio": 280,
+        "imagen": "https://ejemplo.com/img/stickers-vinilo.jpg",
+        "categoria": "Stickers",
+        "material": "Vinilo adhesivo"
+      },
+      {
+        "id": "ST002",
+        "titulo": "Stickers Reflectivos",
+        "descripcion": "Stickers de seguridad reflectivos",
+        "tamaño": "10 cm x 15 cm",
+        "precio": 350,
+        "imagen": "https://ejemplo.com/img/stickers-reflectivos.jpg",
+        "categoria": "Stickers",
+        "material": "Vinilo reflectivo"
+      }
+    ]
+  }
+}

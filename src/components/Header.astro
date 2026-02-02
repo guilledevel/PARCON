@@ -1,0 +1,74 @@
+---
+const { pathname } = Astro.url;
+const linkClass = (href: string) =>
+  pathname === href
+    ? "text-cyan-400 font-bold hover:text-(--complement)  transition duration-300 ease-in-out "
+    : "text-white hover:text-cyan-300 active:text-cyan-500  transition duration-300 ease-in-out ";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/productos", label: "productos" },
+  { href: "/cotizar", label: "cotizar" },
+];
+---
+
+<div class="bg-slate-950">
+  <header
+    class="relative container h-15 mx-auto flex md:justify-around justify-between px-6 items-center md:sticky top-0">
+    <a href="/" class="flex gap-2 items-center z-30">
+      <img src="/parcon.webp" class="w-10" alt="logo de la empresa" />
+      <h2 class="uppercase text-cyan-400 font-bold">Parcon</h2></a
+    >
+
+    <!-- Botón hamburguesa -->
+    <label
+      class="bg-slate-800 size-8 bg-cover bg-repeat-y bg-center z-30 cursor-pointer md:hidden">
+      <input type="checkbox" class="hidden" id="nav-input" />
+    </label>
+
+    <!-- MENU -->
+    <nav
+      class="fixed md:relative md:translate-x-0 inset-0 md:bg-transparent bg-slate-950 flex justify-center z-20">
+      <ul class="my-20 md:my-0 flex flex-col md:flex-row gap-4 m:gap-8">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} class={linkClass(`${link.href}`)}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </header>
+</div>
+
+<style>
+  header {
+    --icon-toggle-menu: url(/public/svg/IconMenu.svg);
+    --transform-nav: translateX(-100%);
+  }
+  nav {
+    transform: var(--transform-nav);
+    transition: 1s;
+  }
+  label {
+    background-image: var(--icon-toggle-menu);
+  }
+  header:has(input:checked) {
+    --icon-toggle-menu: url(/public/svg/IconX.svg);
+    --transform-nav: translateX(0);
+  }
+  /* En modo escritorio, siempre mostrar el menú */
+  @media (min-width: 768px) {
+    header {
+      --transform-nav: translateX(0);
+    }
+
+    nav {
+      position: relative;
+      transform: none !important;
+    }
+  }
+</style>

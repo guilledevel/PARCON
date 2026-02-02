@@ -1,71 +1,67 @@
 ---
 // filepath: e:\DEV\PARCON\src\components\Cinta.astro
-import icons from '/public/data/icons.json';
+import icons from "/public/data/icons.json";
 const allItems = [...icons, ...icons]; // duplicar para efecto de loop
 const duration = 50;
-const allIcons = icons.length
-console.log(allIcons);
+const allIcons = icons.length;
 ---
 
-
-
- <div class="wrapper bg-gradient-to-r from-purple-500 to-cyan-400 h-7 md:h-14">
-
-    {allItems.map((icon, index) => (
-      <div class="item w-18 md:w-36" 
-      
-      style={`
-      animation-delay: ${(duration / allIcons) * (allIcons - index - 1) * - 1}s
+<div
+  class="wrapper w-screen bg-gradient-to-r from-purple-500 to-cyan-400 h-7 md:h-14">
+  {
+    allItems.map((icon, index) => (
+      <div
+        class="item w-18 md:w-36"
+        style={`
+      animation-delay: ${(duration / allIcons) * (allIcons - index - 1) * -1}s
       
       `}>
-        <img src={icon.url} alt={icon.nombre} title={icon.nombre} class="h-7 w-auto" />
+        <img
+          src={icon.url}
+          alt={icon.nombre}
+          title={icon.nombre}
+          class="h-7 w-auto"
+        />
       </div>
-    ))}
-  </div>
+    ))
+  }
+</div>
 
 <style>
-  
-
   .wrapper {
-  
-  
-  width: 100%;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
 
-  mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 1)20%,
-    rgba(0, 0, 0, 1)80%,
-    rgba(0, 0, 0, 0)
-  );
-}
-
-.item {
-  display: flex;
-  gap: 5px;
- 
-
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  left: max(calc(60px * 16), 100%);
-  animation: scroll 50s linear infinite;
-}
-
-   
-@keyframes scroll {
-  to {
-    left: -100px;
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1) 20%,
+      rgba(0, 0, 0, 1) 80%,
+      rgba(0, 0, 0, 0)
+    );
   }
 
-}
- @media (width >= 48rem){
-  .item{
-    left: max(calc(130px * 16), 100%);
+  .item {
+    display: flex;
+    gap: 5px;
+
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: max(calc(60px * 16), 100%);
+    animation: scroll 50s linear infinite;
   }
- }
+
+  @keyframes scroll {
+    to {
+      left: -100px;
+    }
+  }
+  @media (width >= 48rem) {
+    .item {
+      left: max(calc(130px * 16), 100%);
+    }
+  }
 </style>

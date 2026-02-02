@@ -1,29 +1,28 @@
 @import "tailwindcss";
-/* global.css */
-/* src/styles/global.css */
+
 @font-face {
-  font-family: 'Montserrat';
-  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-family: "Inter Variable";
+  src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("woff2-variations");
   font-weight: 100 900;
+  font-style: normal;
   font-display: swap;
 }
 
-html {
-  font-family: 'Montserrat', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+html,
+body {
+  font-family: "Inter Variable", system-ui, sans-serif;
 }
-@theme {
-    --primary: #00001C;
-    --secundary: #07EFE8;
-    --complement : #FF2B9A;
-} 
 
+@theme {
+  --primary: #00001c;
+  --secundary: #07efe8;
+  --complement: #ff2b9a;
+}
 
 @layer utilities {
   @keyframes gradient-x {
-    0%, 100% {
+    0%,
+    100% {
       background-position: 0% 50%;
     }
     50% {
@@ -40,8 +39,12 @@ html {
 
 /* ...existing code... */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
