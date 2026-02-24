@@ -23,7 +23,7 @@
     "nombre": "Adhesivo",
     "precios": {
       "base": 140, 
-      "plastificado": 70,
+      "plastificado": 80,
       "instalacion": 40
     },
     "opciones_ui": [
@@ -36,7 +36,7 @@
     "precios": {
       "base": 180,
       "dosCaras": 290,
-      "plastificado": 70,
+      "plastificado": 80,
       "patas": 120
     },
     "opciones_ui": [
@@ -48,9 +48,9 @@
   "luminoso": {
     "nombre": "Luminoso",
     "precios": {
-      "base": 530,
-      "dosCaras": 900,
-      "plastificado": 70,
+      "base": 550,
+      "dosCaras": 850,
+      "plastificado": 80,
       "patas": 120
     },
     "opciones_ui": [
@@ -63,8 +63,8 @@
   "cambioPanaflex" : {
     "nombre" : "cambio panaflex",
     "precios": {
-      "base": 190,
-      "plastificado": 70,
+      "base": 180,
+      "plastificado": 80,
       "cambio_focos": 40
     },
     "opciones_ui": [
@@ -77,7 +77,7 @@
     "nombre": "cambio de lona",
   "precios" : {
     "base" :150,
-    "plastificado": 70
+    "plastificado": 80
   } ,
     "opciones_ui": [
       { "campo": "dos_caras", "tipo": "checkbox", "label": "Doble cara" },
