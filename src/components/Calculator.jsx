@@ -302,7 +302,7 @@ export default function Calculator() {
       precioFinal = redondear(precioBase);
     }
 
-    setPrecio(Math.round(precioFinal + 20).toLocaleString("es-BO"));
+    setPrecio(Math.round(precioFinal + 30).toLocaleString("es-BO"));
   }
 
   // Render dinámico de checkboxes
