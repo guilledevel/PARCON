@@ -13,8 +13,8 @@ const imagenURL =
   <div class="relative aspect-square overflow-hidden bg-slate-900">
     <!-- Imagen -->
     <img
-      src={imagenURL}
-      alt="Bastidor Aluminio Profesional"
+      src={imagen || "https://placehold.co/400x400?text=Sin+Imagen"}
+      alt={titulo}
       class="size-full object-cover transition-transform duration-500 group-hover:scale-110"
       loading="lazy"
       width="300"

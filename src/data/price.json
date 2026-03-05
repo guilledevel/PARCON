@@ -1,87 +1,107 @@
 {
-  "banner": {
-    "nombre": "Banner",
-    "precios": {
-      "base": 120,
-      "varilla": 130
-    },
-    "opciones_ui": [
-      { "campo": "varilla", "tipo": "checkbox", "label": "¿Con varilla?" }
-    ]
+  "configuracionGlobal": {
+    "complementos": {
+      "plastificado": {
+        "nombre": "Plastificado",
+        "precio": 80,
+        "tipoControl": "checkbox"
+      },
+      "instalacion": {
+        "nombre": "Instalación",
+        "precio": 40,
+        "tipoControl": "checkbox"
+      },
+      "conPatas": {
+        "nombre": "Con Patas",
+        "precio": 120,
+        "tipoControl": "checkbox"
+      }
+    }
   },
-  "sticker": {
-    "nombre": "Sticker",
-    "precios": {
-      "base": 150
+  "productos": {
+    "banner": {
+      "nombre": "Banner",
+      "precioBase": 120,
+      "opcionesEspecificas": [
+        {
+          "id": "conVarilla",
+          "label": "¿Con varilla?",
+          "precio": 130,
+          "tipoControl": "checkbox"
+        }
+      ]
     },
-    "opciones_ui": [
-
-      { "campo": "cantidad", "tipo": "number", "label": "Cantidad" }
-    ]
-  },
-  "adhesivo": {
-    "nombre": "Adhesivo",
-    "precios": {
-      "base": 140, 
-      "plastificado": 80,
-      "instalacion": 40
+    "sticker": {
+      "nombre": "Sticker",
+      "precioBase": 150,
+      "opcionesEspecificas": [
+        {
+          "id": "cantidad",
+          "label": "Cantidad",
+          "tipoControl": "number"
+        }
+      ]
     },
-    "opciones_ui": [
-      { "campo": "plastificado", "tipo": "checkbox", "label": "¿Plastificado?" },
-      { "campo": "instalacion", "tipo": "checkbox", "label": "¿Instalación?" }
-    ]
-  },
-  "bastidor": {
-    "nombre": "Bastidor",
-    "precios": {
-      "base": 180,
-      "dosCaras": 290,
-      "plastificado": 80,
-      "patas": 120
+    "adhesivo": {
+      "nombre": "Adhesivo",
+      "precioBase": 140,
+      "complementosCompatibles": ["plastificado", "instalacion"]
     },
-    "opciones_ui": [
-      { "campo": "dos_caras", "tipo": "checkbox", "label": "¿Dos caras?" },
-      { "campo": "plastificado", "tipo": "checkbox", "label": "Plastificado" },
-      { "campo": "patas", "tipo": "checkbox", "label": "¿Con Patas?" }
-    ]
-  },
-  "luminoso": {
-    "nombre": "Luminoso",
-    "precios": {
-      "base": 550,
-      "dosCaras": 850,
-      "plastificado": 80,
-      "patas": 120
+    "bastidor": {
+      "nombre": "Bastidor",
+      "precioBase": 180,
+      "precioDosCaras": 290,
+      "complementosCompatibles": ["plastificado", "conPatas"],
+      "opcionesEspecificas": [
+        {
+          "id": "dosCaras",
+          "label": "¿Dos caras?",
+          "tipoControl": "checkbox"
+        }
+      ]
     },
-    "opciones_ui": [
-      { "campo": "dos_caras", "tipo": "checkbox", "label": "¿Dos caras?" },
-      { "campo": "plastificado", "tipo": "checkbox", "label": "Plastificado" },
-      { "campo": "patas", "tipo": "checkbox", "label": "¿Con Patas?" }
-    ]
-  },
-  
-  "cambioPanaflex" : {
-    "nombre" : "cambio panaflex",
-    "precios": {
-      "base": 180,
-      "plastificado": 80,
-      "cambio_focos": 40
+    "luminoso": {
+      "nombre": "Luminoso",
+      "precioBase": 550,
+      "precioDosCaras": 850,
+      "complementosCompatibles": ["plastificado", "conPatas"],
+      "opcionesEspecificas": [
+        {
+          "id": "dosCaras",
+          "label": "¿Dos caras?",
+          "tipoControl": "checkbox"
+        }
+      ]
     },
-    "opciones_ui": [
-      { "campo": "plastificado", "tipo": "checkbox", "label": "plastificado?" },
-      { "campo": "dos_caras", "tipo": "checkbox", "label": "dos caras" },
-      { "campo": "focos", "tipo": "number", "label": "¿focos" }
-    ]
-  },
-  "cambioLona":{
-    "nombre": "cambio de lona",
-  "precios" : {
-    "base" :150,
-    "plastificado": 80
-  } ,
-    "opciones_ui": [
-      { "campo": "dos_caras", "tipo": "checkbox", "label": "Doble cara" },
-      { "campo": "plastificado", "tipo": "checkbox", "label": "¿Plastificado?" }
-    ]
- }
+    "cambioPanaflex": {
+      "nombre": "Cambio Panaflex",
+      "precioBase": 180,
+      "complementosCompatibles": ["plastificado"],
+      "opcionesEspecificas": [
+        {
+          "id": "dosCaras",
+          "label": "Dos caras",
+          "tipoControl": "checkbox"
+        },
+        {
+          "id": "focos",
+          "label": "Cantidad de focos",
+          "precioPorUnidad": 40,
+          "tipoControl": "number"
+        }
+      ]
+    },
+    "cambioLona": {
+      "nombre": "Cambio de Lona",
+      "precioBase": 150,
+      "opcionesEspecificas": [
+        {
+          "id": "dobleCara",
+          "label": "Doble cara",
+          "tipoControl": "checkbox"
+        }
+      ],
+      "complementosCompatibles": ["plastificado"]
+    }
+  }
 }

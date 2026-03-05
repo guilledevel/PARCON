@@ -2,7 +2,8 @@
 import Navbar from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
-const urlBase = "https://parcon.netlify.app/";
+const { pathname } = Astro.url;
+const { title = "PARCON" } = Astro.props;
 
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
@@ -51,7 +52,7 @@ import "../styles/global.css";
       content="https://parcon.netlify.app/media.webp"
     />
 
-    <title>PARCON</title>
+    <title>{title === "PARCON" ? title : `${title} | PARCON`}</title>
   </head>
 
   <body class="bg-slate-900">
