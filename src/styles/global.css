@@ -8,18 +8,21 @@
   font-display: swap;
 }
 
-html,
-body {
+:root {
   font-family: "Inter Variable", system-ui, sans-serif;
 }
 
 @theme {
-  --primary: #00001c;
-  --secundary: #07efe8;
-  --complement: #ff2b9a;
-}
+  /* Colores Originales Diseñados para Parcon */
+  --color-primary: #0081C9;    /* Azul Parcon */
+  --color-secondary: #FF008E;  /* Rosa Vibrante */
+  --color-accent: #00FFF0;     /* Cyan Eléctrico */
+  --color-dark: #0A0E27;       /* Azul Oscuro de fondo */
 
-@layer utilities {
+  /* Animaciones Personalizadas */
+  --animate-gradient-x: gradient-x 6s ease infinite;
+  --animate-marquee: marquee 20s linear infinite;
+
   @keyframes gradient-x {
     0%,
     100% {
@@ -30,24 +33,29 @@ body {
     }
   }
 
-  .animate-gradient-x {
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer utilities {
+  /* Clase de utilidad para fondos animados */
+  .bg-gradient-animate {
     background-size: 200% 200%;
-    background-position: 0% 50%;
-    animation: gradient-x 6s ease infinite;
   }
-}
 
-/* ...existing code... */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
+  /* Utilidad para el gradiente icónico de Parcon en texto */
+  .text-gradient-parcon {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-accent via-primary to-secondary;
   }
-  100% {
-    transform: translateX(-50%);
-  }
-}
 
-.animate-marquee {
-  animation: marquee 20s linear infinite;
+  /* Botón con el estilo diseñado anteriormente */
+  .btn-parcon {
+    @apply px-6 py-3 rounded-xl font-bold transition-all duration-300 bg-linear-to-tr from-primary to-secondary hover:scale-105 hover:shadow-[0_0_20px_rgba(255,0,142,0.4)] text-white;
+  }
 }
-/* ...existing code... */

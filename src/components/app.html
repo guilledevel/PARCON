@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parcon | Publicidad Digital e Impresión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+    <style>
+      :root {
+        --parcon-blue: #0081c9;
+        --parcon-pink: #ff008e;
+        --parcon-cyan: #00fff0;
+        --parcon-dark: #0a0e27;
+      }
+
+      body {
+        background-color: var(--parcon-dark);
+        color: white;
+        font-family: "Inter", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      .gradient-text {
+        background: linear-gradient(
+          90deg,
+          var(--parcon-cyan),
+          var(--parcon-pink)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          45deg,
+          var(--parcon-blue),
+          var(--parcon-pink)
+        );
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 0, 142, 0.4);
+      }
+
+      .service-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--parcon-cyan);
+      }
+
+      .paint-splatter {
+        filter: drop-shadow(0 0 10px var(--parcon-cyan));
+      }
+
+      #quote-result {
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navegación -->
+    <nav
+      class="fixed w-full z-50 bg-[#0A0E27]/80 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <div class="flex items-center">
+            <div class="text-3xl font-bold tracking-tighter">
+              <span class="text-white">P</span
+              ><span class="gradient-text">arcon</span>
+            </div>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a href="#inicio" class="hover:text-cyan-400 transition">Inicio</a>
+            <a href="#servicios" class="hover:text-cyan-400 transition"
+              >Servicios</a
+            >
+            <a href="#cotizador" class="hover:text-cyan-400 transition"
+              >Cotizador</a
+            >
+            <a
+              href="#contacto"
+              class="px-5 py-2 btn-primary rounded-full text-sm font-bold"
+              >Contactar</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="inicio"
+      class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-full opacity-20">
+        <div
+          class="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-600 rounded-full blur-[120px]"></div>
+        <div
+          class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-600 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 space-y-6">
+          <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+            Impresión que <br />
+            <span class="gradient-text">Cobra Vida</span>
+          </h1>
+          <p class="text-gray-400 text-lg max-w-lg">
+            Especialistas en gigantografías, cartelería de alto impacto y
+            publicidad digital. Llevamos tus ideas al formato más grande con la
+            mayor resolución.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="#cotizador"
+              class="btn-primary px-8 py-4 rounded-xl font-bold text-lg"
+              >Cotizar ahora</a
+            >
+            <button
+              class="border border-white/20 hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition">
+              Nuestro portafolio
+            </button>
+          </div>
+        </div>
+        <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center">
+          <div class="relative w-80 h-80 md:w-[450px] md:h-[450px]">
+            <!-- Placeholder para representación visual del logo/arte -->
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-cyan-500 to-pink-500 rounded-3xl rotate-6 opacity-20"></div>
+            <div
+              class="absolute inset-0 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 flex items-center justify-center overflow-hidden">
+              <i class="fa-solid fa-paintbrush text-9xl gradient-text"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-24 bg-black/30">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Soluciones de Impresión</h2>
+          <div class="h-1 w-20 bg-pink-600 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="service-card p-8 rounded-3xl">
+            <div
+              class="w-14 h-14 bg-cyan-500/20 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fa-solid fa-expand text-cyan-400 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Gigantografías</h3>
+            <p class="text-gray-400">
+              Banners de gran formato en lona frontlight, backlight y mesh con
+              tintas resistentes UV.
+            </p>
+          </div>
+
+          <div class="service-card p-8 rounded-3xl">
+            <div
+              class="w-14 h-14 bg-pink-500/20 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fa-solid fa-layer-group text-pink-400 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Vinilos y Adhesivos</h3>
+            <p class="text-gray-400">
+              Rotulación de vehículos, vidrieras y decoración de interiores con
+              materiales de alta durabilidad.
+            </p>
+          </div>
+
+          <div class="service-card p-8 rounded-3xl">
+            <div
+              class="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fa-solid fa-lightbulb text-purple-400 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Cartelería LED</h3>
+            <p class="text-gray-400">
+              Letreros corpóreos y cajas de luz que destacan tu marca tanto de
+              día como de noche.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cotizador -->
+    <section id="cotizador" class="py-24">
+      <div class="max-w-4xl mx-auto px-4">
+        <div
+          class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-[2.5rem]">
+          <h2 class="text-3xl font-bold mb-8 text-center">
+            Calcula tu Presupuesto
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2"
+                >Material</label
+              >
+              <select
+                id="material"
+                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500">
+                <option value="1500" class="bg-slate-800">
+                  Lona Frontlight ($1.500/m²)
+                </option>
+                <option value="2500" class="bg-slate-800">
+                  Vinilo Autoadhesivo ($2.500/m²)
+                </option>
+                <option value="3500" class="bg-slate-800">
+                  Microperforado ($3.500/m²)
+                </option>
+                <option value="4000" class="bg-slate-800">
+                  Lona Backlight ($4.000/m²)
+                </option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2"
+                >Acabado</label
+              >
+              <select
+                id="finish"
+                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500">
+                <option value="0" class="bg-slate-800">
+                  Sin acabado adicional
+                </option>
+                <option value="500" class="bg-slate-800">
+                  Ojalillos perimetrales (+$500)
+                </option>
+                <option value="800" class="bg-slate-800">
+                  Laminado Mate/Brillo (+$800)
+                </option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2"
+                >Ancho (metros)</label
+              >
+              <input
+                type="number"
+                id="width"
+                value="1"
+                min="0.1"
+                step="0.1"
+                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2"
+                >Alto (metros)</label
+              >
+              <input
+                type="number"
+                id="height"
+                value="1"
+                min="0.1"
+                step="0.1"
+                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500" />
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <button
+              onclick="calculateQuote()"
+              class="btn-primary w-full md:w-auto px-12 py-4 rounded-xl font-bold mb-6">
+              Calcular Total
+            </button>
+
+            <div
+              id="quote-result"
+              class="hidden text-center p-6 bg-cyan-500/10 rounded-2xl border border-cyan-500/30 w-full">
+              <span class="text-gray-400 block mb-1">Total estimado</span>
+              <span
+                class="text-4xl font-extrabold text-cyan-400"
+                id="total-price"
+                >$0.00</span
+              >
+              <p class="text-xs text-gray-500 mt-2">
+                * Precio sujeto a revisión de diseño y urgencia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <footer id="contacto" class="bg-black/50 py-16 border-t border-white/10">
+      <div
+        class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div>
+          <div class="text-3xl font-bold mb-6">
+            <span class="text-white">P</span
+            ><span class="gradient-text">arcon</span>
+          </div>
+          <p class="text-gray-400 mb-6">
+            Tu aliado estratégico en comunicación visual e impresión de alta
+            fidelidad.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-cyan-500/20 transition"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              href="#"
+              class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-pink-500/20 transition"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="#"
+              class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-blue-500/20 transition"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold mb-6">Contacto</h4>
+          <ul class="space-y-4 text-gray-400">
+            <li class="flex items-center">
+              <i class="fa-solid fa-location-dot mr-3 text-pink-500"></i> Av.
+              Principal 123, Sector Industrial
+            </li>
+            <li class="flex items-center">
+              <i class="fa-solid fa-phone mr-3 text-cyan-500"></i> +54 11 2345
+              6789
+            </li>
+            <li class="flex items-center">
+              <i class="fa-solid fa-envelope mr-3 text-purple-500"></i>
+              ventas@parcon.com
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold mb-6">Suscríbete</h4>
+          <div class="flex">
+            <input
+              type="email"
+              placeholder="Tu email"
+              class="bg-white/10 border border-white/20 rounded-l-xl px-4 py-3 w-full focus:outline-none" />
+            <button class="btn-primary px-4 rounded-r-xl">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+          <p class="text-xs text-gray-500 mt-4">
+            Recibe ofertas exclusivas y novedades de impresión.
+          </p>
+        </div>
+      </div>
+      <div
+        class="text-center mt-16 pt-8 border-t border-white/5 text-gray-600 text-sm">
+        &copy; 2024 Parcon Publicidad Digital e Impresión. Todos los derechos
+        reservados.
+      </div>
+    </footer>
+
+    <script>
+      function calculateQuote() {
+        const materialPrice = parseFloat(
+          document.getElementById("material").value,
+        );
+        const finishPrice = parseFloat(document.getElementById("finish").value);
+        const width = parseFloat(document.getElementById("width").value);
+        const height = parseFloat(document.getElementById("height").value);
+
+        if (width > 0 && height > 0) {
+          const area = width * height;
+          const total = area * materialPrice + finishPrice;
+
+          const resultDiv = document.getElementById("quote-result");
+          const priceSpan = document.getElementById("total-price");
+
+          resultDiv.classList.remove("hidden");
+          priceSpan.innerText = new Intl.NumberFormat("es-AR", {
+            style: "currency",
+            currency: "ARS",
+          }).format(total);
+        }
+      }
+    </script>
+  </body>
+</html>
