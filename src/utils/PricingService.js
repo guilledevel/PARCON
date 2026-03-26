@@ -62,8 +62,8 @@ export const PricingService = {
 
       case "sticker":
         const cantidad = parseInt(opciones["cantidad"]) || 0;
-        if (cantidad < 50) {
-          error = "La cantidad mínima para stickers es 50 unidades.";
+        if (cantidad < 5) {
+          error = "La cantidad mínima para stickers es 5 unidades.";
         } else if (area < 0.0025) {
           error = "El tamaño mínimo para stickers es 5x5 cm.";
         } else {
