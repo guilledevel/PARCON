@@ -1,0 +1,154 @@
+<div
+  class="min-h-screen bg-slate-950 text-white relative overflow-hidden flex flex-col">
+  <!-- FONDOS DECORATIVOS -->
+  <div
+    class="absolute top-0 left-0 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl">
+  </div>
+  <div
+    class="absolute bottom-0 right-0 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl">
+  </div>
+
+  <!-- HEADER -->
+  <header
+    class="w-full sticky top-0 z-50 backdrop-blur-md bg-slate-950/60 border-b border-white/10">
+    <div
+      class="container mx-auto h-16 flex justify-between items-center px-6 lg:px-12">
+      <a href="/" class="flex gap-3 items-center group">
+        <div class="relative">
+          <div
+            class="absolute inset-0 bg-cyan-400 rounded-full blur-md opacity-40 group-hover:opacity-70 transition">
+          </div>
+
+          <img
+            src="/parcon.webp"
+            alt="Logo PARCON"
+            class="relative w-10 md:w-12"
+          />
+        </div>
+
+        <h2 class="uppercase text-cyan-400 font-bold text-lg tracking-widest">
+          PARCON
+        </h2>
+      </a>
+
+      <span class="hidden sm:flex items-center gap-2 text-sm text-slate-400">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        Actualización en proceso
+      </span>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main
+    class="flex-1 flex items-center justify-center px-6 py-10 relative z-10">
+    <section
+      class="w-full max-w-3xl text-center rounded-3xl
+      bg-white/5 backdrop-blur-xl border border-white/10
+      p-8 md:p-12 shadow-[0_0_80px_rgba(0,0,0,0.5)]">
+      <!-- ICONO -->
+      <div class="relative w-24 h-24 mx-auto mb-8">
+        <div class="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full"></div>
+
+        <div
+          class="absolute inset-0 rounded-full border-2 border-transparent
+          border-t-cyan-400 border-r-violet-600 animate-spin">
+        </div>
+
+        <svg
+          class="relative w-full h-full p-6 text-cyan-300"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 15a3 3 0 100-6 3 3 0 000 6"></path>
+
+          <path
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.622 10.395l-1.097-2.65L20 6l-2-2-1.735 1.483-2.707-1.113L12.935 2h-1.954l-.632 2.401-2.645 1.115L6 4 4 6l1.453 1.75-1.08 2.693L2 11v2l2.401.655L5.516 16.3 4 18l2 2 1.755-1.47 2.695 1.098L11 22h2l.604-2.401 2.651-1.108L18 20l2-2-1.453-1.75 1.075-2.7L22 13v-2l-2.378-.605z"
+          ></path>
+        </svg>
+      </div>
+
+      <!-- BADGE -->
+      <div
+        class="inline-flex items-center gap-3 px-5 py-2 rounded-full
+        bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 mb-8">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        Actualizando nuestros servicios
+      </div>
+
+      <!-- TITULO -->
+      <h1 class="text-4xl md:text-6xl font-black leading-tight">
+        Estamos mejorando <br />
+
+        <span
+          class="bg-gradient-to-r from-violet-500 to-cyan-400
+          bg-clip-text text-transparent">
+          tu experiencia
+        </span>
+      </h1>
+
+      <!-- LINEA DECORATIVA -->
+      <div
+        class="w-32 h-1 mx-auto my-7 rounded-full
+        bg-gradient-to-r from-violet-600 to-cyan-400">
+      </div>
+
+      <!-- TEXTO -->
+      <p class="max-w-xl mx-auto text-slate-300 text-lg leading-relaxed">
+        Estamos realizando mejoras para ofrecer un sitio más rápido, moderno y
+        seguro. Muy pronto volveremos con una experiencia renovada.
+      </p>
+
+      <!-- BARRA DE CARGA -->
+      <div class="mt-10">
+        <div
+          class="w-full max-w-md h-2 mx-auto bg-white/10
+          rounded-full overflow-hidden">
+          <div class="loading-bar"></div>
+        </div>
+
+        <p class="mt-4 text-sm uppercase tracking-[0.35em] text-slate-500">
+          Mantenimiento temporal
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 border-t border-white/10 py-6">
+    <div class="container mx-auto text-center text-sm text-slate-500">
+      © 2026 PARCON — Construyendo una mejor experiencia digital
+    </div>
+  </footer>
+</div>
+
+<style>
+  /* Barra de carga animada */
+  .loading-bar {
+    width: 35%;
+    height: 100%;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #7c3aed, #22d3ee, #7c3aed);
+    box-shadow:
+      0 0 12px #22d3ee,
+      0 0 24px #7c3aed;
+
+    animation: loading-slide 2s ease-in-out infinite;
+  }
+
+  @keyframes loading-slide {
+    0% {
+      transform: translateX(-120%);
+    }
+
+    100% {
+      transform: translateX(300%);
+    }
+  }
+</style>

@@ -7,6 +7,8 @@ const { title = "PARCON" } = Astro.props;
 
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
+
+import Mantenimiento from "@components/man/Mantenimiento.astro";
 ---
 
 <!doctype html>
@@ -57,14 +59,16 @@ import "../styles/global.css";
 
   <body class="bg-slate-900">
     <div class="division min-h-dvh text-slate-200 w-full">
-      <Navbar />
+      <Mantenimiento />
+
+      <!-- <Navbar />
       <main
         class="container w-full mx-auto flex flex-col items-center gap-2 px-6">
         <ClientRouter transition:name="slide" />
         <slot />
       </main>
 
-      <Footer />
+      <Footer /> -->
     </div>
   </body>
 </html>
